@@ -1,0 +1,82 @@
+import XCTest
+import Sodium
+
+@testable import keri_swift
+
+final class MatterTests: XCTestCase {
+    let s = Sodium()
+
+    func seededPublicKey() -> Box.KeyPair.PublicKey {
+        let kp = s.box.keyPair(seed: s.utils.hex2bin("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff", ignore: " ")!)!
+        return kp.publicKey
+    }
+
+    func testCreatingMatter() throws {
+        let pub = seededPublicKey()
+        let m = try! Matter(raw: pub)
+
+        XCTAssertEqual(m.raw, pub)
+        XCTAssertEqual(m.raw.count, 32)
+        XCTAssertEqual(m.code, "B")
+        XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
+        XCTAssertEqual(m.qb64b()!, s.utils.base642bin("BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")!)
+        XCTAssertEqual(m.qb2()!, Array("B".utf8) + pub)
+    }
+
+    func testCreatingMatterBadCode() {
+        let pub = seededPublicKey()
+        XCTAssertThrowsError(try Matter(raw: pub, code: "X")) { error in
+            XCTAssertEqual(error as! MatterError, MatterError.invalidCode(code: "X", pad: 1))
+        }
+    }
+
+    func testCreatingMatterBadTwoCharacterCode() {
+        let raw = s.utils.base642bin("5gjSh76EtUGZbcN_adbiCjGFWye7su6_HDC2P1IlsBKxpA2_C3ZFxvt80P4CJcpCMhsLj3Mi-9fRXimWpK7zrA", variant: .URLSAFE_NO_PADDING)!
+        XCTAssertThrowsError(try Matter(raw: raw, code: "XX")) { error in
+            XCTAssertEqual(error as! MatterError, MatterError.invalidCode(code: "XX", pad: 2))
+        }
+    }
+
+    func testCreatingMatterWithQualifiedBase64() {
+        let pub = seededPublicKey()
+        let qb64 = "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4"
+        let m = try! Matter(qb64: qb64)
+
+        XCTAssertEqual(m.raw, pub)
+        XCTAssertEqual(m.raw.count, 32)
+        XCTAssertEqual(m.code, "B")
+        XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
+        XCTAssertEqual(m.qb2()!, Array("B".utf8) + pub)
+    }
+
+    func testOneCharacterCountCodeSize() {
+        let bin = s.utils.base642bin("aU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM=", variant: .URLSAFE)!
+        let m = try! Matter(raw: bin)
+
+        ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"].forEach {
+            XCTAssertTrue(m.OneCharacterCodes.contains($0))
+        }
+        XCTAssertEqual(16, m.OneCharacterCodes.count)
+    }
+
+    func testTwoCharacterCountCodeSize() {
+        let bin = s.utils.base642bin("aU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM=", variant: .URLSAFE)!
+        let m = try! Matter(raw: bin)
+
+        ["0A", "0B", "0C", "0D", "0E", "0F", "0G", "0H", "4A", "4B", "5A", "5B", "6A", "6B"].forEach {
+            XCTAssertTrue(m.TwoCharacterCodes.contains($0))
+        }
+        XCTAssertEqual(14, m.TwoCharacterCodes.count)
+    }
+
+    func testFourCharacterCountCodeSize() {
+        let bin = s.utils.base642bin("aU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM=", variant: .URLSAFE)!
+        let m = try! Matter(raw: bin)
+
+        ["1AAA", "1AAB", "1AAC", "1AAD", "1AAE", "1AAF", "1AAG", "1AAH", "2AAA", "3AAA", "7AAA",
+         "7AAB", "8AAA", "8AAB", "9AAA", "9AAB"].forEach {
+            XCTAssertTrue(m.FourCharacterCodes.contains($0))
+        }
+        XCTAssertEqual(16, m.FourCharacterCodes.count)
+    }
+}
