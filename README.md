@@ -3,7 +3,8 @@ Swift implementation of KERI  (Key Event Receipt Infrastructure)
 
 [![Swift 5.5](https://img.shields.io/badge/Swift-5.5-blue.svg)](https://swift.org/download/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Swift](https://github.com/WebOfTrust/keri-swift/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/WebOfTrust/keri-swift/actions/workflows/ci.yaml)
+[![Swift](https://github.com/WebOfTrust/keri-swift/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/WebOfTrust/keri-swift/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/weboftrust/keri-swift/branch/main/graph/badge.svg?token=QmX4JiwGoZ)](https://codecov.io/gh/weboftrust/keri-swift)
 
 # Introduction
 
