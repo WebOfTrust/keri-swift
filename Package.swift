@@ -19,6 +19,7 @@ let package = Package(
             .package(name: "BLAKE3", url: "https://github.com/nixberg/blake3-swift", branch: "master"),
             .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
             .package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.0.0")),
+            .package(url: "https://github.com/swift-extras/swift-extras-base64.git", branch: "main")
         ],
         targets: [
             // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -29,6 +30,7 @@ let package = Package(
                         "Sodium",
                         "SwiftLMDB",
                         "BLAKE3",
+                        .product(name: "ExtrasBase64", package: "swift-extras-base64"),
                         .product(name: "Logging", package: "swift-log"),
                         .product(name: "Collections", package: "swift-collections"),
                     ]),

@@ -20,7 +20,9 @@ final class MatterTests: XCTestCase {
         XCTAssertEqual(m.code, "B")
         XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
         XCTAssertEqual(m.qb64b()!, s.utils.base642bin("BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")!)
-        XCTAssertEqual(m.qb2()!, Array("B".utf8) + pub)
+
+        let qb2: Bytes = [7, 22, 233, 4, 240, 205, 188, 191, 135, 238, 104, 177, 73, 126, 42, 26, 144, 74, 135, 108, 74, 41, 225, 6, 211, 131, 136, 95, 234, 122, 223, 245, 120]
+        XCTAssertEqual(m.qb2()!, qb2)
     }
 
     func testCreatingMatterBadCode() {
@@ -46,7 +48,23 @@ final class MatterTests: XCTestCase {
         XCTAssertEqual(m.raw.count, 32)
         XCTAssertEqual(m.code, "B")
         XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
-        XCTAssertEqual(m.qb2()!, Array("B".utf8) + pub)
+        XCTAssertEqual(m.qb64b()!, s.utils.base642bin("BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")!)
+
+        let qb2: Bytes = [7, 22, 233, 4, 240, 205, 188, 191, 135, 238, 104, 177, 73, 126, 42, 26, 144, 74, 135, 108, 74, 41, 225, 6, 211, 131, 136, 95, 234, 122, 223, 245, 120]
+        XCTAssertEqual(m.qb2()!, qb2)
+    }
+
+    func testCreatingMatterWithQualifiedBase2() {
+        let pub = seededPublicKey()
+        let qb2: Bytes = [7, 22, 233, 4, 240, 205, 188, 191, 135, 238, 104, 177, 73, 126, 42, 26, 144, 74, 135, 108, 74, 41, 225, 6, 211, 131, 136, 95, 234, 122, 223, 245, 120]
+        let m = try! Matter(qb2: qb2)
+
+        XCTAssertEqual(m.raw, pub)
+        XCTAssertEqual(m.raw.count, 32)
+        XCTAssertEqual(m.code, "B")
+        XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
+        XCTAssertEqual(m.qb64b()!, s.utils.base642bin("BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")!)
+        XCTAssertEqual(m.qb2()!, qb2)
     }
 
     func testOneCharacterCountCodeSize() {

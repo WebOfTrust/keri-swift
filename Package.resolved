@@ -56,6 +56,15 @@
         }
       },
       {
+        "package": "swift-extras-base64",
+        "repositoryURL": "https://github.com/swift-extras/swift-extras-base64.git",
+        "state": {
+          "branch": "main",
+          "revision": "97237cf1bc1feebaeb0febec91c1e1b9e4d839b3",
+          "version": null
+        }
+      },
+      {
         "package": "swift-log",
         "repositoryURL": "https://github.com/apple/swift-log.git",
         "state": {

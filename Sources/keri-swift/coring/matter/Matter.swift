@@ -7,6 +7,7 @@
 
 import Foundation
 import Sodium
+import ExtrasBase64
 
 public struct Matter {
     private let sodium = Sodium()
@@ -39,7 +40,7 @@ public struct Matter {
 
     /// Fully Qualified Binary Version Bytes
     public func qb2() -> Bytes? {
-        Array(_code.utf8) + _raw
+        try? Base64.decode(string: qb64()!, options: .base64UrlAlphabet)
     }
 
     /**
@@ -52,6 +53,7 @@ public struct Matter {
      - Returns: Matter
      */
     public init(raw: Bytes? = Bytes(),
+                qb2: Bytes? = Bytes(),
                 qb64: String? = "",
                 code: String = MatterCodex[MatterCodes.Ed25519N]!) throws {
 
@@ -90,6 +92,8 @@ public struct Matter {
 
         } else if qb64!.count > 0 {
             exfil(_qb64: qb64!)
+        } else if qb2!.count > 0 {
+            exfil(_qb64: Base64.encodeString(bytes: qb2!, options: .base64UrlAlphabet))
         } else {
             throw MatterError.improperInitialization
         }
