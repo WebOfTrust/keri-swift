@@ -47,6 +47,7 @@ public struct Matter {
      Base for all cryptographic material
      - Parameters:
         - raw: unqualified crypto material usable for crypto operations
+        - qb2: fully qualified base2
         - qb64: fully qualified crypto material
         - code: derivation code
 
