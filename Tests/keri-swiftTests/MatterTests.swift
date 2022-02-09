@@ -61,7 +61,7 @@ final class MatterTests: XCTestCase {
 
         XCTAssertEqual(m.raw, pub)
         XCTAssertEqual(m.raw.count, 32)
-        XCTAssertEqual(m.code, "B")
+        XCTAssertEqual(m.code, "C")
         XCTAssertEqual(m.qb64()!, "BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")
         XCTAssertEqual(m.qb64b()!, s.utils.base642bin("BxbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4")!)
         XCTAssertEqual(m.qb2()!, qb2)
