@@ -12,4 +12,7 @@ public enum MatterError: Error, Equatable {
     case improperInitialization
     case invalidCodeSize
     case mismatchedPaddingCount(expected: Int, got: Int?)
+    case invalidDerivationCode(code: String, in: String)
+    case invalidSizeForCode(code: String, got: Int, expected: Int)
+    case improperlyCodedMaterial(String)
 }
