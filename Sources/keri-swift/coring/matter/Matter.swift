@@ -7,10 +7,8 @@
 
 import ExtrasBase64
 import Foundation
-import Sodium
 
 public struct Matter {
-    private let sodium = Sodium()
     private var pad: Int = 0
 
     private var _code: String
@@ -19,27 +17,34 @@ public struct Matter {
         self._code
     }
 
-    private var _raw: Bytes
+    private var _size: Int?
+    /// number of quadlets of variable sized material else nil if not variable sized matter
+    public var size: Int? {
+        self._size
+    }
+
+    private var _raw: [UInt8]
     /// Unqualified crypto material usable for crypto operations
-    public var raw: Bytes {
+    public var raw: [UInt8] {
         self._raw
     }
 
     /// Fully qualified Base64 version
-    public func qb64() -> String? {
-        self.infil()
+    public func qb64() throws -> String? {
+        try self.infil()
     }
 
     /// Base64 fully qualified with derivation code + crypto mat
-    public func qb64b() -> Bytes? {
-        guard let b64 = qb64() else {
+    public func qb64b() throws -> [UInt8]? {
+        guard let b64 = try qb64() else {
             return nil
         }
-        return self.sodium.utils.base642bin(b64, variant: .URLSAFE)
+
+        return try Base64.decode(string: b64, options: .base64UrlAlphabet)
     }
 
     /// Fully Qualified Binary Version Bytes
-    public func qb2() -> Bytes? {
+    public func qb2() -> [UInt8]? {
         try? Base64.decode(string: self.qb64()!, options: .base64UrlAlphabet)
     }
 
@@ -53,8 +58,8 @@ public struct Matter {
 
      - Returns: Matter
      */
-    public init(raw: Bytes? = Bytes(),
-                qb2: Bytes? = Bytes(),
+    public init(raw: [UInt8]? = [UInt8](),
+                qb2: [UInt8]? = [UInt8](),
                 qb64: String? = "",
                 code: String = MatterCodex[MatterCodes.Ed25519N]!) throws
     {
@@ -92,9 +97,9 @@ public struct Matter {
             }
 
         } else if qb64!.count > 0 {
-            self.exfil(_qb64: qb64!)
+            try? self.exfil(_qb64: qb64!)
         } else if qb2!.count > 0 {
-            self.exfil(_qb64: Base64.encodeString(bytes: qb2!, options: .base64UrlAlphabet))
+            try? self.exfil(_qb64: Base64.encodeString(bytes: qb2!, options: .base64UrlAlphabet))
         } else {
             throw MatterError.improperInitialization
         }
@@ -102,19 +107,25 @@ public struct Matter {
 
     /// returns string of fully qualified Base64 characters
     // _code + converted _raw to Base64 with pad chars stripped
-    private func infil() -> String? {
+    private func infil() throws -> String? {
         let p = self._pad()
         let cc = self._code.count
+
         if cc % 4 != p {
-            logger.error("Invalid code for pad")
-            return nil
+            throw MatterError.invalidCodeForPad(code: self._code, pad: p)
         }
 
         // convert raw to Base64 including padding
-        var b64 = self.sodium.utils.bin2base64(self._raw, variant: .URLSAFE)!
+        var b64 = Base64.encodeString(bytes: self._raw, options: .base64UrlAlphabet)
 
         // check padding against count
-        let padding = b64.filter { $0 == "=" }.map { $0 }.count
+        let padding = b64.filter {
+            $0 == "="
+        }
+        .map {
+            $0
+        }
+        .count
         if cc != padding {
             logger.error("Mismatched padding count")
         }
@@ -127,22 +138,75 @@ public struct Matter {
     }
 
     // Extracts _code and _raw from qualified Base64
-    private mutating func exfil(_qb64: String) {
-        for codeSize in [1, 2, 4] {
-            // derivation codes should be appended to qb64
-            let code = String(_qb64.prefix(codeSize))
-            // check Matter codex for existence of code
-            if let _ = MatterSizes[code] {
-                self._code = code
-                self._raw = self.sodium.utils.base642bin(
-                    // remove prepended derivation code
-                    String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex] +
-                        // append corresponding pad characters
-                        String(repeating: "=", count: codeSize)), variant: .URLSAFE
-                )!
+    private mutating func exfil(_qb64: String) throws {
+        var codeSize = 1
+        var code = String(_qb64.prefix(codeSize))
+        let qb64: String
+        let fullSize: Int
+
+        if let size = MatterSizes[code] {
+            // strip derivation code
+            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
+
+            // verify remaining size is as expected
+            if qb64.count > size.fs! {
+                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
-            break
+            fullSize = size.fs!
+        } else if code == MatterSelectCodex[MatterSelectCodes.Two] {
+            codeSize += 1
+            code = String(_qb64.prefix(codeSize))
+
+            guard let size = MatterSizes[code] else {
+                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+            }
+
+            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
+            if qb64.count > size.fs! {
+                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
+            }
+            fullSize = size.fs!
+        } else if code == MatterSelectCodex[MatterSelectCodes.Four] {
+            codeSize += 3
+            code = String(_qb64.prefix(codeSize))
+
+            guard let size = MatterSizes[code] else {
+                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+            }
+
+            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
+            if qb64.count > size.fs! {
+                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
+            }
+            fullSize = size.fs!
+        } else if code == MatterSelectCodex[MatterSelectCodes.Dash] {
+            codeSize += 1
+            code = String(_qb64.prefix(codeSize))
+
+            guard let size = MatterCountSizes[code] else {
+                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+            }
+
+            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.index(_qb64.startIndex, offsetBy: size.fs!)])
+            try self._size = B64ToInt(s: qb64)
+            fullSize = size.fs!
+        } else {
+            throw MatterError.improperlyCodedMaterial(_: _qb64)
         }
+
+        if _qb64.count != fullSize {
+            throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: fullSize)
+        }
+
+        // qb64 should be stripped of it's code above, just pad
+        let derivedRaw = try Base64.decode(string:
+            String(qb64 + String(repeating: "=", count: codeSize % 4)), options: .base64UrlAlphabet)
+        if derivedRaw.count != Int(floor(Double(((_qb64.count - codeSize) * 3) / 4))) {
+            throw MatterError.improperlyCodedMaterial(_qb64)
+        }
+
+        self._raw = derivedRaw
+        self._code = code
     }
 
     private func _pad() -> Int {
@@ -159,12 +223,12 @@ public struct Matter {
     }
     .map(\.key)
 
-    public let TwoCharacterCodes = MatterSizes.filter {
+    public let TwoCharacterCodes: [String] = MatterSizes.filter {
         $0.key.count == 2
     }
     .map(\.key)
 
-    public let FourCharacterCodes = MatterSizes.filter {
+    public let FourCharacterCodes: [String] = MatterSizes.filter {
         $0.key.count == 4
     }
     .map(\.key)
