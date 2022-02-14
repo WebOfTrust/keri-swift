@@ -8,14 +8,14 @@ import XCTest
 
 @testable import keri_swift
 
-final class HelpingTests: XCTestCase {
+final class ConvertingTests: XCTestCase {
     func testB64ToInt() throws {
         XCTAssertThrowsError(try B64ToInt(s: "")) { error in
-            XCTAssertEqual(error as! ConversionError, ConversionError.undefined)
+            XCTAssertEqual(error as! ConversionErrors, ConversionErrors.undefined)
         }
 
         XCTAssertThrowsError(try B64ToInt(s: "@")) { error in
-            XCTAssertEqual(error as! ConversionError, ConversionError.characterNotFound("@"))
+            XCTAssertEqual(error as! ConversionErrors, ConversionErrors.characterNotFound("@"))
         }
 
         XCTAssertEqual(try B64ToInt(s: "A"), 0)

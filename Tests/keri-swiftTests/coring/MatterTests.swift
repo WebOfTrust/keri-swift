@@ -25,14 +25,14 @@ final class MatterTests: XCTestCase {
 
     func testCreatingMatterBadCode() {
         XCTAssertThrowsError(try Matter(raw: self.raw, code: "X")) { error in
-            XCTAssertEqual(error as! MatterError, MatterError.invalidCode(code: "X", pad: 1))
+            XCTAssertEqual(error as! MatterErrors, MatterErrors.invalidCode(code: "X", pad: 1))
         }
     }
 
     func testCreatingMatterBadTwoCharacterCode() throws {
-        let raw = try Base64.decode(string: "DDbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4", options: .base64UrlAlphabet)
-        XCTAssertThrowsError(try Matter(raw: raw, code: "XX")) { error in
-            XCTAssertEqual(error as! MatterError, MatterError.invalidCode(code: "XX", pad: 0))
+        let raw = try Base64.decode(string: "0XbpBPDNvL-H7mixSX4qGpBKh2xKKeEG04OIX-p63_V4", options: .base64UrlAlphabet)
+        XCTAssertThrowsError(try Matter(raw: raw, code: "0X")) { error in
+            XCTAssertEqual(error as! MatterErrors, MatterErrors.invalidCode(code: "0X", pad: 0))
         }
     }
 
