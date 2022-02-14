@@ -5,7 +5,7 @@
 import Collections
 import Foundation
 
-public enum ConversionError: Error, Equatable {
+public enum ConversionErrors: Error, Equatable {
     case undefined
     case characterNotFound(Character)
 }
@@ -13,13 +13,13 @@ public enum ConversionError: Error, Equatable {
 /// Returns conversion of Base64 str s or bytes to int
 public func B64ToInt(s: String) throws -> Int {
     if s.isEmpty {
-        throw ConversionError.undefined
+        throw ConversionErrors.undefined
     }
 
     var i = 0
     for (e, c) in s.reversed().enumerated() {
         guard let ch = B64IdxByChr[String(c)] else {
-            throw ConversionError.characterNotFound(c)
+            throw ConversionErrors.characterNotFound(c)
         }
         i |= ch << (e * 6)
     }

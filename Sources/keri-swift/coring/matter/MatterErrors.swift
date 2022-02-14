@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum MatterError: Error, Equatable {
+public enum MatterErrors: Error, Equatable {
     case invalidCode(code: String, pad: Int)
     case missingSizageForCode(code: String)
     case mismatchedRawSize(actual: Int, expected: Int)

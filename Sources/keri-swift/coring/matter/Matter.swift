@@ -71,29 +71,29 @@ public struct Matter {
         if self._raw.count > 0 {
             if self.pad == 1 {
                 if !self.OneCharacterCodes.contains(self._code) {
-                    throw MatterError.invalidCode(code: self._code, pad: self.pad)
+                    throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
             if self.pad == 2 {
                 if !self.TwoCharacterCodes.contains(self._code) {
-                    throw MatterError.invalidCode(code: self._code, pad: self.pad)
+                    throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
             if self.pad == 0 {
                 if !self.FourCharacterCodes.contains(self._code) {
-                    throw MatterError.invalidCode(code: self._code, pad: self.pad)
+                    throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
             guard let sizage = MatterSizes[code] else {
-                throw MatterError.missingSizageForCode(code: self._code)
+                throw MatterErrors.missingSizageForCode(code: self._code)
             }
 
             let expectedRawSize = Int(floor(Double((sizage.fs! - (sizage.hs + sizage.ss)) * 3) / 4)) - sizage.ls
             if self._raw.count != expectedRawSize {
-                throw MatterError.mismatchedRawSize(actual: self._raw.count, expected: expectedRawSize)
+                throw MatterErrors.mismatchedRawSize(actual: self._raw.count, expected: expectedRawSize)
             }
 
         } else if qb64!.count > 0 {
@@ -101,7 +101,7 @@ public struct Matter {
         } else if qb2!.count > 0 {
             try? self.exfil(_qb64: Base64.encodeString(bytes: qb2!, options: .base64UrlAlphabet))
         } else {
-            throw MatterError.improperInitialization
+            throw MatterErrors.improperInitialization
         }
     }
 
@@ -112,7 +112,7 @@ public struct Matter {
         let cc = self._code.count
 
         if cc % 4 != p {
-            throw MatterError.invalidCodeForPad(code: self._code, pad: p)
+            throw MatterErrors.invalidCodeForPad(code: self._code, pad: p)
         }
 
         // convert raw to Base64 including padding
@@ -150,7 +150,7 @@ public struct Matter {
 
             // verify remaining size is as expected
             if qb64.count > size.fs! {
-                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
+                throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
         } else if code == MatterSelectCodex[MatterSelectCodes.Two] {
@@ -158,12 +158,12 @@ public struct Matter {
             code = String(_qb64.prefix(codeSize))
 
             guard let size = MatterSizes[code] else {
-                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+                throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
             qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
             if qb64.count > size.fs! {
-                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
+                throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
         } else if code == MatterSelectCodex[MatterSelectCodes.Four] {
@@ -171,12 +171,12 @@ public struct Matter {
             code = String(_qb64.prefix(codeSize))
 
             guard let size = MatterSizes[code] else {
-                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+                throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
             qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
             if qb64.count > size.fs! {
-                throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
+                throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
         } else if code == MatterSelectCodex[MatterSelectCodes.Dash] {
@@ -184,25 +184,25 @@ public struct Matter {
             code = String(_qb64.prefix(codeSize))
 
             guard let size = MatterCountSizes[code] else {
-                throw MatterError.invalidDerivationCode(code: code, in: _qb64)
+                throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
             qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.index(_qb64.startIndex, offsetBy: size.fs!)])
             try self._size = B64ToInt(s: qb64)
             fullSize = size.fs!
         } else {
-            throw MatterError.improperlyCodedMaterial(_: _qb64)
+            throw MatterErrors.improperlyCodedMaterial(_: _qb64)
         }
 
         if _qb64.count != fullSize {
-            throw MatterError.invalidSizeForCode(code: code, got: qb64.count, expected: fullSize)
+            throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: fullSize)
         }
 
         // qb64 should be stripped of it's code above, just pad
         let derivedRaw = try Base64.decode(string:
             String(qb64 + String(repeating: "=", count: codeSize % 4)), options: .base64UrlAlphabet)
         if derivedRaw.count != Int(floor(Double(((_qb64.count - codeSize) * 3) / 4))) {
-            throw MatterError.improperlyCodedMaterial(_qb64)
+            throw MatterErrors.improperlyCodedMaterial(_qb64)
         }
 
         self._raw = derivedRaw
