@@ -4,7 +4,11 @@
 
 import Foundation
 
-public enum Serial: String {
+public enum Serial: String, Comparable {
+    public static func < (lhs: Serial, rhs: Serial) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+
     case json = "JSON"
     case mgpk = "MGPK"
     case cbor = "CBOR"

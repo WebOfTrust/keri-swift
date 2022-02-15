@@ -8,4 +8,5 @@ enum VersionErrors: Error, Comparable {
     case invalidIdentifier
     case invalidSerialization
     case invalidVersion
+    case unsupportedVersion
 }

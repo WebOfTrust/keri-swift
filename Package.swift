@@ -18,12 +18,14 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium.git", from: "0.9.1"),
-        .package(name: "SwiftLMDB", url: "https://github.com/agisboye/SwiftLMDB.git", from: "2.0.0"),
+        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium.git", .upToNextMajor(from: "0.9.1")),
+        .package(name: "SwiftLMDB", url: "https://github.com/agisboye/SwiftLMDB.git", .upToNextMajor(from: "2.0.0")),
         .package(name: "BLAKE3", url: "https://github.com/nixberg/blake3-swift", branch: "master"),
         .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/swift-extras/swift-extras-base64.git", branch: "main"),
+        .package(url: "https://github.com/a2/MessagePack.swift.git", .upToNextMajor(from: "4.0.0")),
+        .package(url: "https://github.com/unrelentingtech/SwiftCBOR", .upToNextMajor(from: "0.4.4")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -34,6 +36,8 @@ let package = Package(
                 "Sodium",
                 "SwiftLMDB",
                 "BLAKE3",
+                "SwiftCBOR",
+                .product(name: "MessagePack", package: "MessagePack.swift"),
                 .product(name: "ExtrasBase64", package: "swift-extras-base64"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Collections", package: "swift-collections"),
