@@ -25,11 +25,10 @@ public let Version = Versionage(major: 1, minor: 0)
 ///   - version: version tuple of type Versionage
 ///   - kind: serialization kind, one of Serials
 ///   - size: int of raw size
-/// - Returns:
-/// - Throws:
-public func Versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) throws -> String {
-    let s = String(size, radix: 16).padding(toLength: 6, withPad: "0", startingAt: 0)
-    return String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue, s)
+/// - Returns: version string
+public func Versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
+    String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue,
+           String(size, radix: 16).padding(toLength: 6, withPad: "0", startingAt: 0))
 }
 
 public let Verex = #"(?<ident>[A-Z]{4})(?<major>[0-9a-f])(?<minor>[0-9a-f])(?<kind>[A-Z]{4})(?<size>[0-9a-f]{6})_"#
@@ -39,10 +38,10 @@ let Groups = ["ident", "major", "minor", "kind", "size"]
 /// Deversify
 /// - Parameter vs: version string
 /// - Returns: tuple(ident, kind, version, size)
-/// ident is event type identifier one of Idents
-/// kind is serialization kind, one of Serials
-/// version is version tuple of type Version
-/// size is int of raw size
+///     - ident is event type identifier one of Idents
+///     - kind is serialization kind, one of Serials
+///     - version is version tuple of type Version
+///     - size is int of raw size
 /// - Throws: VersionErrors.invalidVersion
 public func Deversify(vs: String) throws -> (ident: Ident, kind: Serial, version: Versionage, size: Int) {
     let rng = NSRange(vs.startIndex ..< vs.endIndex, in: vs)
@@ -74,4 +73,35 @@ public func Deversify(vs: String) throws -> (ident: Ident, kind: Serial, version
     }
 
     return (ident: ident, kind: kind, version: Versionage(major: major, minor: minor), size: size)
+}
+
+/// Sizeify
+/// Assumes only supports Version
+/// - Parameters:
+///   - ked: key event dict
+///   - kind: serialization if given else use one given in ked
+/// - Returns:tuple of (raw, kind, ked, version) where:
+///     - raw is serialized event as bytes of kind
+///     - kind is serialization kind
+///     - ked is key event dict
+///     - version is Versionage instance
+public func Sizeify(ked: [String: Any], kind: Serial?) throws -> (raw: [UInt8], kind: Ident, ked: [String: Any], version: Versionage)
+{
+    guard let vs = ked["v"] as? String else {
+        throw SizeifyErrors.missingVersion
+    }
+
+    let (ident, knd, version, size) = try Deversify(vs: vs)
+
+    if kind != knd {
+        throw SizeifyErrors.mismatchedSerialization(knd, kind!)
+    }
+
+    if !Serials.contains(kind!) {
+        throw SizeifyErrors.invalidSerialization(kind!)
+    }
+
+//    let raw = dump()
+    1
+    return (raw: [], kind: .keri, ked: [:], version: Version)
 }
