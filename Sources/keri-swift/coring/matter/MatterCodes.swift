@@ -4,6 +4,7 @@
 
 import Foundation
 
+// swiftlint:disable identifier_name
 public enum MatterCodes: String, CaseIterable {
     case Ed25519_Seed
     case Ed25519N
@@ -52,3 +53,5 @@ public enum MatterCodes: String, CaseIterable {
     case Str_Big_L1
     case Str_Big_L2
 }
+
+// swiftlint:enable identifier_name

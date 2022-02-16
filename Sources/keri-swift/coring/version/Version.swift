@@ -26,7 +26,7 @@ public let Version = Versionage(major: 1, minor: 0)
 ///   - kind: serialization kind, one of Serials
 ///   - size: int of raw size
 /// - Returns: version string
-public func Versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
+public func versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
     String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue,
            String(size, radix: 16).padding(toLength: 6, withPad: "0", startingAt: 0))
 }
@@ -43,7 +43,7 @@ let Groups = ["ident", "major", "minor", "kind", "size"]
 ///     - version is version tuple of type Version
 ///     - size is int of raw size
 /// - Throws: VersionErrors.invalidVersion
-public func Deversify(vs: String) throws -> (ident: Ident, kind: Serial, version: Versionage, size: Int) {
+public func deversify(vs: String) throws -> (ident: Ident, kind: Serial, version: Versionage, size: Int) {
     let rng = NSRange(vs.startIndex ..< vs.endIndex, in: vs)
     var captures: [String: String] = [:]
 
@@ -73,35 +73,4 @@ public func Deversify(vs: String) throws -> (ident: Ident, kind: Serial, version
     }
 
     return (ident: ident, kind: kind, version: Versionage(major: major, minor: minor), size: size)
-}
-
-/// Sizeify
-/// Assumes only supports Version
-/// - Parameters:
-///   - ked: key event dict
-///   - kind: serialization if given else use one given in ked
-/// - Returns:tuple of (raw, kind, ked, version) where:
-///     - raw is serialized event as bytes of kind
-///     - kind is serialization kind
-///     - ked is key event dict
-///     - version is Versionage instance
-public func Sizeify(ked: [String: Any], kind: Serial?) throws -> (raw: [UInt8], kind: Ident, ked: [String: Any], version: Versionage)
-{
-    guard let vs = ked["v"] as? String else {
-        throw SizeifyErrors.missingVersion
-    }
-
-    let (ident, knd, version, size) = try Deversify(vs: vs)
-
-    if kind != knd {
-        throw SizeifyErrors.mismatchedSerialization(knd, kind!)
-    }
-
-    if !Serials.contains(kind!) {
-        throw SizeifyErrors.invalidSerialization(kind!)
-    }
-
-//    let raw = dump()
-    1
-    return (raw: [], kind: .keri, ked: [:], version: Version)
 }

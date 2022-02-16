@@ -6,21 +6,9 @@ import Foundation
 import MessagePack
 import SwiftCBOR
 
-//        .diger is Diger instance of digest of .raw
-//        .dig  is qb64 digest from .diger
-//        .digb is qb64b digest from .diger
-//        .verfers is list of Verfers converted from .ked["k"]
-//        .werfers is list of Verfers converted from .ked["b"]
-//        .tholder is Tholder instance from .ked["kt'] else None
-//        .sn is int sequence number converted from .ked["s"]
-//        .pre is qb64 str of identifier prefix from .ked["i"]
-//        .preb is qb64b bytes of identifier prefix from .ked["i"]
-//        .said is qb64 of .ked['d'] if present
-//        .saidb is qb64b of .ked['d'] of present
-
 /// Serder is KERI key event serializer-deserializer class
-// Only supports current version VERSION
-struct Serder {
+/// Only supports current version VERSION
+struct Serder: Loadage {
     private var _raw: [UInt8] = []
     /// Bytes of serialized event
     public var raw: [UInt8] {
@@ -48,11 +36,11 @@ struct Serder {
     /// init
     ///
     /// - Parameters:
-    ///   - raw:
-    ///   - ked:
-    ///   - kind:
-    ///   - sad:
-    ///   - code:
+    ///   - raw: bytes of serialized event only
+    ///   - ked: key event dict
+    ///   - kind: serialization kind string value
+    ///   - sad: self addressing data
+    ///   - code: default code
     /// - Throws:
     init(raw: [UInt8] = [], ked: [String: Any], kind: Ident = .keri, sad: String = "", code: String = MatterCodex[MatterCodes.Blake3_256]!) throws {
         if kind != .keri {
@@ -86,7 +74,7 @@ struct Serder {
             throw VersionErrors.invalidVersion
         }
 
-        return try Deversify(vs: vs)
+        return try deversify(vs: vs)
     }
 
     /// inhale
@@ -111,62 +99,61 @@ struct Serder {
         return (ked, v.ident, v.kind, v.version, v.size)
     }
 
-    ///
+    /// exhale - (sizeify)
     ///
     /// - Parameters:
-    ///   - ked: key event dict
-    ///   - kind:
-    /// - Returns:
+    ///   - ked: key event dict, mutated with new version
+    ///   - kind: serialization if given else use one given in ked
+    /// - Returns:tuple of (raw, kind, ked, version) where:
+    ///     - raw is serialized event as bytes of kind
+    ///     - kind is serialization kind
+    ///     - version is Versionage instance
     /// - Throws:
-    private func exhale(ked: [String: Any], kind: Serial?) throws -> (raw: [UInt8], kind: Ident, ked: [String: Any], version: Versionage) {
-        try Sizeify(ked: ked, kind: kind)
-    }
-
-    /// loads
-    /// utility function to handle deserialization by kind
-    /// - Parameters:
-    ///   - raw: raw serialization to deserialize as dictionary
-    ///   - size: number of bytes to consume for the deserialization. If 0 then consume all bytes
-    ///   - kind: serialization kind (JSON, MGPK, CBOR)
-    /// - Returns: deserialized ked
-    /// - Throws:
-    private func loads(raw: [UInt8] = [], size: Int = 0, kind: Serial = .json) throws -> [String: Any]? {
-        var dict: [String: Any]?
-        if kind == .json {
-            dict = try JSONSerialization.jsonObject(with: Data(raw)) as? [String: Any]
-        } else if kind == .mgpk {
-            // let mpv = try MessagePack.unpackAll(Data(bytes: raw))
-            throw SerderErrors.notImplemented(kind)
-        } else if kind == .cbor {
-            // let decoded = try! CBOR.decode(raw)
-            throw SerderErrors.notImplemented(kind)
-        } else {
-            throw SerderErrors.invalidDeserializationKind(kind)
+    private func exhale(ked: inout [String: Any], kind: Serial = .json)
+        throws -> (raw: [UInt8], kind: Serial, version: Versionage)
+    {
+        guard let vs = ked["v"] as? String else {
+            throw SizeifyErrors.missingVersion
         }
 
-        return dict
-    }
+        let (ident, knd, version, size) = try deversify(vs: vs)
 
-    /// dumps
-    /// utility function to handle serialization by kind
-    /// - Parameters:
-    ///   - ked: key event dict or message dict to serialize
-    ///   - kind: serialization kind (JSON, MGPK, CBOR)
-    /// - Returns: serialized version of ked dict
-    /// - Throws:
-    private func dumps(ked: [String: Any], kind: Serial = .json) throws -> [UInt8] {
-        var raw: [UInt8] = []
-
-        if kind == .json {
-            raw = try [UInt8](JSONSerialization.data(withJSONObject: ked))
-        } else if kind == .mgpk {
-            throw SerderErrors.notImplemented(kind)
-        } else if kind == .cbor {
-            throw SerderErrors.notImplemented(kind)
-        } else {
-            throw SerderErrors.invalidSerializationKind(kind)
+        if kind != knd {
+            throw SerderErrors.exhaleKindMismatch
         }
 
-        return raw
+        if !Serials.contains(kind) {
+            throw SerialErrors.invalidSerialization(kind)
+        }
+
+        var raw: [UInt8] = try dumps(ked: ked)
+        let rsize: Int = raw.count
+
+        guard let vs = String(data: Data(raw[0 ..< MinSniffSize]), encoding: .utf8) else {
+            throw VersionErrors.invalidVersion
+        }
+
+        // convert found version string to bytes
+        let vsb: [UInt8] = Array(vs.utf8)
+        // range of found version string bytes in raw
+        let vsr: Range<Int> = raw.firstRange(of: vsb)! // happy to force unwrap as we found the bytes
+        // update vs with latest kind version size
+        let vers: String = versify(ident: ident, version: version, size: size)
+        // new version string bytes
+        let nvsb: [UInt8] = Array(vers.utf8)
+
+        if vsb.count != nvsb.count {
+            throw SerderErrors.failedVersionSubstitution
+        }
+
+        // replace old version string in raw with new one
+        raw.replaceSubrange(vsr, with: nvsb)
+        if size != rsize {
+            throw SerderErrors.failedVersionSubstitution
+        }
+
+        ked["v"] = vs
+
+        return (raw: raw, kind: kind, version: version)
     }
 }
