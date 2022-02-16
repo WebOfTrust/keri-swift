@@ -10,12 +10,12 @@ final class VersionTests: XCTestCase {
     func testVersify() throws {
         var vsy = ""
 
-        XCTAssertNoThrow(vsy = try Versify(ident: .keri, version: Version, kind: .json, size: 0))
+        XCTAssertNoThrow(vsy = try versify(ident: .keri, version: Version, kind: .json, size: 0))
         XCTAssertEqual(vsy, "KERI10JSON000000_")
     }
 
     func testDeversify() throws {
-        let v = try XCTUnwrap(try Deversify(vs: "KERI10JSON000000_"))
+        let v = try XCTUnwrap(try deversify(vs: "KERI10JSON000000_"))
         XCTAssertNotNil(v)
 
         XCTAssertEqual(v.ident, .keri)
@@ -26,13 +26,13 @@ final class VersionTests: XCTestCase {
     }
 
     func testDeversifyEmpty() throws {
-        XCTAssertThrowsError(try Deversify(vs: "")) { error in
+        XCTAssertThrowsError(try deversify(vs: "")) { error in
             XCTAssertEqual(error as! VersionErrors, VersionErrors.invalidVersion)
         }
     }
 
     func testDeversifyBadIdent() throws {
-        XCTAssertThrowsError(try Deversify(vs: "AAAA10JSON000000_")) { error in
+        XCTAssertThrowsError(try deversify(vs: "AAAA10JSON000000_")) { error in
             XCTAssertEqual(error as! VersionErrors, VersionErrors.invalidVersion)
         }
     }

@@ -12,4 +12,6 @@ public enum SerderErrors: Error, Comparable {
     case failedKedExtraction
     case invalidIdent
     case invalidSerializationKind(Serial)
+    case exhaleKindMismatch
+    case failedVersionSubstitution
 }

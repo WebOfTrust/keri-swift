@@ -5,8 +5,8 @@
 import Foundation
 
 /// Sizage (hs, ss, fs, ls) where hs is hard size, ss is soft size, and fs is full size
-// and ls is lead size soft size, ss, should always be 0 for Matter unless fs is 0 which allows
-// for variable size multiple of 4, i.e. not (hs + ss) % 4.
+/// and ls is lead size soft size, ss, should always be 0 for Matter unless fs is 0 which allows
+/// for variable size multiple of 4, i.e. not (hs + ss) % 4.
 public typealias Sizage = (hs: Int, ss: Int, fs: Int?, ls: Int)
 
 public let MatterSizes: [String: Sizage] = [
