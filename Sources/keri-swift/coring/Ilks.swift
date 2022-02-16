@@ -26,4 +26,23 @@ public enum Ilk: String {
     case brv // brv = backed vc revoke, registry-backed transaction event log credential revocation
 }
 
-public let Ilks: Set<Ilk> = [.icp, .rot, .ixn, .dip, .drt, .rct, .ksn, .qry, .rpy, .exn, .exp, .fwd, .vcp, .iss, .rev, .bis, .brv, .vrt]
+public let Ilks: Set<Ilk> = [
+    .icp,
+    .rot,
+    .ixn,
+    .dip,
+    .drt,
+    .rct,
+    .ksn,
+    .qry,
+    .rpy,
+    .exn,
+    .exp,
+    .fwd,
+    .vcp,
+    .iss,
+    .rev,
+    .bis,
+    .brv,
+    .vrt,
+]

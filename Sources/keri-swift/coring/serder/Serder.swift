@@ -47,12 +47,12 @@ struct Serder: Loadage {
             throw SerderErrors.invalidIdent
         }
 
-        if raw.count > 0 {
+        if !raw.isEmpty {
             self._raw = raw
-        } else if ked.count > 0 {
+        } else if !ked.isEmpty {
             self._kind = kind
             self._ked = ked
-        } else if sad.count > 0 {
+        } else if !sad.isEmpty {
             self._sad = sad
         } else {
             throw SerderErrors.improperInitialization
@@ -65,7 +65,7 @@ struct Serder: Loadage {
     ///
     /// - Returns:
     /// - Throws:
-    private func sniff() throws -> (ident: Ident, kind: Serial, version: Versionage, size: Int) {
+    private func sniff() throws -> Deversified {
         if self._raw.count < self.MinSniffSize {
             throw SerderErrors.insufficientBytes
         }
@@ -81,6 +81,7 @@ struct Serder: Loadage {
     ///
     /// - Returns:
     /// - Throws:
+    //swiftlint:disable large_tuple
     private func inhale() throws -> ([String: Any], Ident, Serial, Versionage, Int) {
         let v = try sniff()
 
