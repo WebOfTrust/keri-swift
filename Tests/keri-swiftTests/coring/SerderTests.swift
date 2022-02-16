@@ -7,7 +7,5 @@ import XCTest
 @testable import keri_swift
 
 final class SerderTests: XCTestCase {
-    func testSerder() {
-        
-    }
+    func testSerder() {}
 }
