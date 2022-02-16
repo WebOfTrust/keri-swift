@@ -9,7 +9,7 @@ struct Diger {
     let matter: Matter
 
     init(raw: [UInt8], qb64: String? = "", code: String = MatterCodex[MatterCodes.Blake3_256]!) throws {
-        if raw.count > 0 {
+        if !raw.isEmpty {
             self.matter = try Matter(raw: raw, code: code)
         } else {
             throw DigerErrors.unsupported

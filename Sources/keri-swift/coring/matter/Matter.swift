@@ -68,7 +68,7 @@ public struct Matter {
 
         self.pad = self._pad()
 
-        if self._raw.count > 0 {
+        if !self._raw.isEmpty {
             if self.pad == 1 {
                 if !self.OneCharacterCodes.contains(self._code) {
                     throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
@@ -96,9 +96,9 @@ public struct Matter {
                 throw MatterErrors.mismatchedRawSize(actual: self._raw.count, expected: expectedRawSize)
             }
 
-        } else if qb64!.count > 0 {
+        } else if !qb64!.isEmpty {
             try? self.exfil(_qb64: qb64!)
-        } else if qb2!.count > 0 {
+        } else if !qb2!.isEmpty {
             try? self.exfil(_qb64: Base64.encodeString(bytes: qb2!, options: .base64UrlAlphabet))
         } else {
             throw MatterErrors.improperInitialization
@@ -187,7 +187,8 @@ public struct Matter {
                 throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
-            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.index(_qb64.startIndex, offsetBy: size.fs!)])
+            qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize)
+                    ..< _qb64.index(_qb64.startIndex, offsetBy: size.fs!)])
             try self._size = B64ToInt(s: qb64)
             fullSize = size.fs!
         } else {
