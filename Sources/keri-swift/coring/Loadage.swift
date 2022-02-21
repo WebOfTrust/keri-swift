@@ -2,6 +2,7 @@
 // Created by Kevin Griffin on 2/16/22.
 //
 
+import Collections
 import Foundation
 
 protocol Loadage {}
@@ -15,10 +16,10 @@ extension Loadage {
     ///   - kind: serialization kind (JSON, MGPK, CBOR)
     /// - Returns: deserialized ked
     /// - Throws:
-    func loads(raw: [UInt8] = [], size: Int = 0, kind: Serial = .json) throws -> [String: Any]? {
-        var dict: [String: Any]?
+    func loads(raw: [UInt8] = [], size: Int = 0, kind: Serial = .json) throws -> OrderedDictionary<String, Any>? {
+        var dict: OrderedDictionary<String, Any>?
         if kind == .json {
-            dict = try JSONSerialization.jsonObject(with: Data(raw)) as? [String: Any]
+            dict = try JSONSerialization.jsonObject(with: Data(raw)) as? OrderedDictionary<String, Any>
         } else if kind == .mgpk {
             // let mpv = try MessagePack.unpackAll(Data(bytes: raw))
             throw SerderErrors.notImplemented(kind)
@@ -39,7 +40,7 @@ extension Loadage {
     ///   - kind: serialization kind (JSON, MGPK, CBOR)
     /// - Returns: serialized version of ked dict
     /// - Throws:
-    func dumps(ked: [String: Any], kind: Serial = .json) throws -> [UInt8] {
+    func dumps(ked: OrderedDictionary<String, Any>, kind: Serial = .json) throws -> [UInt8] {
         var raw: [UInt8] = []
 
         if kind == .json {

@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "RNJSON",
+        "repositoryURL": "https://github.com/m00sey/RNJSON.git",
+        "state": {
+          "branch": "main",
+          "revision": "1c067f17bdfa10a676fa519d039c44ed1773631e",
+          "version": null
+        }
+      },
+      {
         "package": "swift-algorithms",
         "repositoryURL": "https://github.com/apple/swift-algorithms",
         "state": {

@@ -4,10 +4,12 @@
 
 import Foundation
 
-public enum Ilk: String {
+public enum Ilk: String, Codable {
     case ilk // ilk is short for message type
     case icp // icp = incept, inception
     case rot // rot = rotate, rotation
+    case ort // ort = rotate, partial rotation
+    case dor // dor = rotate, partial delegated rotation
     case ixn // ixn = interact, interaction
     case dip // dip = delcept, delegated inception
     case drt // drt = deltate, delegated rotation
@@ -26,9 +28,16 @@ public enum Ilk: String {
     case brv // brv = backed vc revoke, registry-backed transaction event log credential revocation
 }
 
+extension Ilk: Comparable {
+    public static func < (lhs: Ilk, rhs: Ilk) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+}
+
 public let Ilks: Set<Ilk> = [
     .icp,
     .rot,
+    .ort,
     .ixn,
     .dip,
     .drt,

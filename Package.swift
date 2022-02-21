@@ -26,6 +26,7 @@ let package = Package(
         .package(url: "https://github.com/swift-extras/swift-extras-base64.git", branch: "main"),
         .package(url: "https://github.com/a2/MessagePack.swift.git", .upToNextMajor(from: "4.0.0")),
         .package(url: "https://github.com/unrelentingtech/SwiftCBOR", .upToNextMajor(from: "0.4.4")),
+        .package(url: "https://github.com/m00sey/RNJSON.git", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -37,6 +38,7 @@ let package = Package(
                 "SwiftLMDB",
                 "BLAKE3",
                 "SwiftCBOR",
+                "RNJSON",
                 .product(name: "MessagePack", package: "MessagePack.swift"),
                 .product(name: "ExtrasBase64", package: "swift-extras-base64"),
                 .product(name: "Logging", package: "swift-log"),

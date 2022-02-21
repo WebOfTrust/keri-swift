@@ -12,6 +12,7 @@ public let VerFmt = "%@%x%x%@%@_"
 
 // number of characters in full versions string
 public let VerFullSize = 17
+public let MinSniffSize = VerFullSize + 12
 
 public typealias Versionage = (major: Int, minor: Int)
 

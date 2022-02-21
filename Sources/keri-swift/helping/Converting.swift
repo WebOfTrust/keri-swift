@@ -28,7 +28,7 @@ public func B64ToInt(s: String) throws -> Int {
 }
 
 /// Returns conversion of int i to Base64 str
-// l is min number of b64 digits left padded with Base64 0 == "A" char
+/// l is min number of b64 digits left padded with Base64 0 == "A" char
 public func IntToB64(i: Int, l: Int? = 1) -> String {
     var d: Deque<String> = []
     var _i = i, _l = l!

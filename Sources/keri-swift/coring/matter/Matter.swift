@@ -108,8 +108,8 @@ public struct Matter {
     /// returns string of fully qualified Base64 characters
     // _code + converted _raw to Base64 with pad chars stripped
     private func infil() throws -> String? {
-        let p = self._pad()
-        let cc = self._code.count
+        let p: Int = self._pad()
+        let cc: Int = self._code.count
 
         if cc % 4 != p {
             throw MatterErrors.invalidCodeForPad(code: self._code, pad: p)
