@@ -10,6 +10,7 @@ final class IlksTests: XCTestCase {
     func testIlks() {
         XCTAssertTrue(Ilks.contains(.icp))
         XCTAssertTrue(Ilks.contains(.rot))
+        XCTAssertTrue(Ilks.contains(.ort))
         XCTAssertTrue(Ilks.contains(.ixn))
         XCTAssertTrue(Ilks.contains(.dip))
         XCTAssertTrue(Ilks.contains(.drt))

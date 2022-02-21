@@ -3,7 +3,6 @@
 //
 
 import Foundation
-
 import XCTest
 
 @testable import keri_swift
