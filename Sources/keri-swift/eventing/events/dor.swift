@@ -5,7 +5,7 @@
 import Foundation
 
 /// Delegated Partial Rotation Event
-///{
+/// {
 ///  "v" : "KERI10JSON00011c_",
 ///  "t" : "dor",
 ///  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
@@ -25,7 +25,7 @@ import Foundation
 ///  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
 ///  "br":  ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
 ///  "di" : "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
-///}
+/// }
 
 public struct dor {
     public var v: String
