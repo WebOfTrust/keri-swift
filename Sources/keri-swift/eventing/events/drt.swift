@@ -36,7 +36,7 @@ public struct drt {
     public var br: [String]
     public var di: String
 
-    //swiftlint:disable line_length
+    // swiftlint:disable line_length
     public init(v: String, t: Ilk, d: String, i: String, s: Int, p: String, kt: Int, k: [String], n: String, bt: Int, ba: [String], br: [String], di: String) {
         self.v = v
         self.t = t
@@ -52,13 +52,13 @@ public struct drt {
         self.br = br
         self.di = di
     }
-    //swiftlint:enable line_length
+
+    // swiftlint:enable line_length
 
     enum CodingKeys: String, CodingKey {
         case v, t, d, i, s, p, kt, k, n, bt, ba, br, di
     }
 }
-
 
 extension drt: Codable {
     public init(from decoder: Decoder) throws {

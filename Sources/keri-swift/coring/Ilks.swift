@@ -20,8 +20,9 @@ public enum Ilk: String, Codable {
     case exn // exn = exchange
     case exp // exp = expose, sealed data exposition
     case fwd // fwd = forward, ??
-    case vcp // vcp = vdr incept, verifiable data registry inception
-    case vrt // vrt = vdr rotate, verifiable data registry rotation
+    case vcp // vcp = incept, verifiable data registry inception
+    case vrt // vrt = rotate, verifiable data registry rotation
+    case vrc // vrc = transferable prefix signer receipt
     case iss // iss = vc issue, verifiable credential issuance
     case rev // rev = vc revoke, verifiable credential revocation
     case bis // bis = backed vc issue, registry-backed transaction event log credential issuance
