@@ -11,7 +11,7 @@ import XCTest
 final class EventTests: XCTestCase {
     // Should maintain ordering through serialization/deserialization
     func testICP() throws {
-        let _icp = icp(v: "KERI10JSON00011c_",
+        let _icp = ICP(v: "KERI10JSON00011c_",
                        t: Ilk.icp,
                        d: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
                        i: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -30,7 +30,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(icp.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(ICP.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.icp)
         XCTAssertEqual(dec.d, "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM")
@@ -45,7 +45,7 @@ final class EventTests: XCTestCase {
     }
 
     func testROT() throws {
-        let _rot = rot(v: "KERI10JSON00011c_",
+        let _rot = ROT(v: "KERI10JSON00011c_",
                        t: Ilk.rot,
                        d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
                        i: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -65,7 +65,7 @@ final class EventTests: XCTestCase {
         """
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(rot.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(ROT.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.rot)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -81,7 +81,7 @@ final class EventTests: XCTestCase {
     }
 
     func testORT() throws {
-        let _ort = ort(v: "KERI10JSON00011c_",
+        let _ort = ORT(v: "KERI10JSON00011c_",
                        t: Ilk.ort,
                        d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
                        i: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -106,7 +106,7 @@ final class EventTests: XCTestCase {
         """
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(ort.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(ORT.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.ort)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -125,7 +125,7 @@ final class EventTests: XCTestCase {
     }
 
     func testIXN() throws {
-        let _ixn = ixn(v: "KERI10JSON00011c_",
+        let _ixn = IXN(v: "KERI10JSON00011c_",
                        t: Ilk.ixn,
                        d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
                        i: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -144,7 +144,7 @@ final class EventTests: XCTestCase {
         """
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(ixn.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(IXN.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.ixn)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -160,7 +160,7 @@ final class EventTests: XCTestCase {
     }
 
     func testDIP() throws {
-        let _dip = dip(
+        let _dip = DIP(
             v: "KERI10JSON00011c_",
             t: Ilk.dip,
             d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
@@ -182,7 +182,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(dip.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(DIP.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.dip)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -198,7 +198,7 @@ final class EventTests: XCTestCase {
     }
 
     func testDRT() throws {
-        let _drt = drt(
+        let _drt = DRT(
             v: "KERI10JSON00011c_",
             t: Ilk.drt,
             d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
@@ -221,7 +221,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(drt.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(DRT.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.drt)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -238,7 +238,7 @@ final class EventTests: XCTestCase {
     }
 
     func testDOR() throws {
-        let _dor = dor(
+        let _dor = DOR(
             v: "KERI10JSON00011c_",
             t: Ilk.dor,
             d: "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
@@ -266,7 +266,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(dor.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(DOR.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.dor)
         XCTAssertEqual(dec.d, "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM")
@@ -288,7 +288,7 @@ final class EventTests: XCTestCase {
     }
 
     func testRCT() throws {
-        let _rct = rct(
+        let _rct = RCT(
             v: "KERI10JSON00011c_",
             t: Ilk.rct,
             d: "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
@@ -303,7 +303,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(rct.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(RCT.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.rct)
         XCTAssertEqual(dec.d, "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM")
@@ -312,7 +312,7 @@ final class EventTests: XCTestCase {
     }
 
     func testVRC() throws {
-        let _vrc = vrc(
+        let _vrc = VRC(
             v: "KERI10JSON00011c_",
             t: Ilk.vrc,
             d: "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
@@ -332,7 +332,7 @@ final class EventTests: XCTestCase {
         let ser = String(data: data, encoding: .utf8)!
         XCTAssertEqual(ser, expected)
 
-        let dec = try RNJSONDecoder().decode(vrc.self, from: Data(data))
+        let dec = try RNJSONDecoder().decode(VRC.self, from: Data(data))
         XCTAssertEqual(dec.v, "KERI10JSON00011c_")
         XCTAssertEqual(dec.t, Ilk.vrc)
         XCTAssertEqual(dec.d, "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM")
@@ -367,5 +367,19 @@ final class EventTests: XCTestCase {
 
         let dec = try RNJSONDecoder().decode(MerkleTreeRootDigestSeal.self, from: Data(data))
         XCTAssertEqual(dec.rd, "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM")
+    }
+
+    func testRegistrarSeal() throws {
+        let _seal = RegistrarSeal(d: "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM", bi: "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM")
+        let data = try RNJSONEncoder().encode(_seal)
+        let expected = """
+        {"d":"EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM","bi":"DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"}
+        """
+        let ser = String(data: data, encoding: .utf8)!
+        XCTAssertEqual(ser, expected)
+
+        let dec = try RNJSONDecoder().decode(RegistrarSeal.self, from: Data(data))
+        XCTAssertEqual(dec.d, "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM")
+        XCTAssertEqual(dec.bi, "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM")
     }
 }

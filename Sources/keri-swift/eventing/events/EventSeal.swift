@@ -10,7 +10,6 @@ import Foundation
 ///   "i": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
 ///   "s": "1"
 /// }
-
 public struct EventSeal {
     public var d: String
     public var i: String

@@ -34,8 +34,7 @@ import Foundation
 ///  "c" : ["EO"],
 ///  "a" : []
 /// }
-
-public struct icp {
+public struct ICP {
     let v: String
     let t: Ilk
     let d: String
@@ -48,6 +47,7 @@ public struct icp {
     let b: [String]
     let c: [String]
 
+    // swiftlint:disable line_length
     public init(v: String, t: Ilk, d: String, i: String, s: Int, kt: Int, k: [String], n: String, bt: Int, b: [String], c: [String]) {
         self.v = v
         self.t = t
@@ -62,12 +62,14 @@ public struct icp {
         self.c = c
     }
 
+    // swiftlint:enable line_length
+
     enum CodingKeys: String, CodingKey {
         case v, t, d, i, s, kt, k, n, bt, b, c
     }
 }
 
-extension icp: Codable {
+extension ICP: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.v = try values.decode(String.self, forKey: .v)

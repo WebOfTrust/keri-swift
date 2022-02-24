@@ -26,8 +26,7 @@ import Foundation
 ///  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
 ///  "a" : []
 /// }
-
-struct ort {
+struct ORT {
     let v: String
     let t: Ilk
     let d: String
@@ -42,6 +41,7 @@ struct ort {
     let ba: [String]
     let br: [String]
 
+    // swiftlint:disable line_length
     init(v: String, t: Ilk, d: String, i: String, s: Int, p: String, kt: Int, k: [String], ot: Int, n: String, bt: Int, ba: [String], br: [String]) {
         self.v = v
         self.t = t
@@ -58,12 +58,14 @@ struct ort {
         self.br = br
     }
 
+    // swiftlint:enable line_length
+
     enum CodingKeys: String, CodingKey {
         case v, t, d, i, s, p, kt, k, ot, n, bt, ba, br
     }
 }
 
-extension ort: Codable {
+extension ORT: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.v = try values.decode(String.self, forKey: .v)

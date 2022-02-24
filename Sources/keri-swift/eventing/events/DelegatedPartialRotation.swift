@@ -4,24 +4,29 @@
 
 import Foundation
 
-/// Basic Delegated Rotation Event
+/// Delegated Partial Rotation Event
 /// {
 ///  "v" : "KERI10JSON00011c_",
-///  "t" : "drt",
+///  "t" : "dor",
 ///  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
 ///  "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
 ///  "s" : "1",
 ///  "p" : "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-///  "kt": "1",
-///  "k" : ["EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"],
+///  "kt": "2",
+///  "k" :
+///    [
+///      "Ed8JZAoTNZaU6JR2nmwyZ-i0H3ULvYAfSVPzhzS6b5CM",
+///      "Ed8JZAoTNZaU6JR2nmwyZ-i0H3ULvYAfSVPzhzS6b5CM",
+///      "Ed8JZAoTNZaU6JR2nmwyZ-i0H3ULvYAfSVPzhzS6b5CM"
+///    ],
+///  "ot": "3",
 ///  "n" : "EYAfSVPzhzZ-i0d8JZAoTNZH3ULvaU6JR2nmwyS6b5CM",
 ///  "bt": "1",
-///  "ba": ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
-///  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-///  "di": "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+///  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
+///  "br":  ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+///  "di" : "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
 /// }
-
-public struct drt {
+public struct DOR {
     public var v: String
     public var t: Ilk
     public var d: String
@@ -30,6 +35,7 @@ public struct drt {
     public var p: String
     public var kt: Int
     public var k: [String]
+    public var ot: Int
     public var n: String
     public var bt: Int
     public var ba: [String]
@@ -37,7 +43,7 @@ public struct drt {
     public var di: String
 
     // swiftlint:disable line_length
-    public init(v: String, t: Ilk, d: String, i: String, s: Int, p: String, kt: Int, k: [String], n: String, bt: Int, ba: [String], br: [String], di: String) {
+    public init(v: String, t: Ilk, d: String, i: String, s: Int, p: String, kt: Int, k: [String], ot: Int, n: String, bt: Int, ba: [String], br: [String], di: String) {
         self.v = v
         self.t = t
         self.d = d
@@ -46,6 +52,7 @@ public struct drt {
         self.p = p
         self.kt = kt
         self.k = k
+        self.ot = ot
         self.n = n
         self.bt = bt
         self.ba = ba
@@ -56,11 +63,11 @@ public struct drt {
     // swiftlint:enable line_length
 
     enum CodingKeys: String, CodingKey {
-        case v, t, d, i, s, p, kt, k, n, bt, ba, br, di
+        case v, t, d, i, s, p, kt, k, ot, n, bt, ba, br, di
     }
 }
 
-extension drt: Codable {
+extension DOR: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.v = try values.decode(String.self, forKey: .v)
@@ -73,6 +80,8 @@ extension drt: Codable {
         let _kt = try values.decode(String.self, forKey: .kt)
         self.kt = Int(_kt)!
         self.k = try values.decode([String].self, forKey: .k)
+        let _ot = try values.decode(String.self, forKey: .ot)
+        self.ot = Int(_ot)!
         self.n = try values.decode(String.self, forKey: .n)
         let _bt = try values.decode(String.self, forKey: .bt)
         self.bt = Int(_bt)!
@@ -91,6 +100,7 @@ extension drt: Codable {
         try container.encode(self.p, forKey: .p)
         try container.encode(String(self.kt), forKey: .kt)
         try container.encode(self.k, forKey: .k)
+        try container.encode(String(self.ot), forKey: .ot)
         try container.encode(self.n, forKey: .n)
         try container.encode(String(self.bt), forKey: .bt)
         try container.encode(self.ba, forKey: .ba)

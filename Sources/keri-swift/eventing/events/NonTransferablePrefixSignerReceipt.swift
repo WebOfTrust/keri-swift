@@ -8,14 +8,13 @@ import Foundation
 /// For receipts the d field is the SAID of the associated event not the receipt message itself.
 ///
 /// {
-//  "v": "KERI10JSON00011c_",
-//  "t": "rct",
-//  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-//  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-//  "s": "1"
-// }
-
-public struct rct {
+///  "v": "KERI10JSON00011c_",
+///  "t": "rct",
+///  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+///  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+///  "s": "1"
+/// }
+public struct RCT {
     public var v: String
     public var t: Ilk
     public var d: String
@@ -35,7 +34,7 @@ public struct rct {
     }
 }
 
-extension rct: Codable {
+extension RCT: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.v = try values.decode(String.self, forKey: .v)
