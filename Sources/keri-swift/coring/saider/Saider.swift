@@ -2,65 +2,31 @@
 // Created by Kevin Griffin on 2/17/22.
 //
 
+import BLAKE3
 import Collections
+import ExtrasBase64
 import Foundation
 import RNJSON
 
-protocol Saidable {
-    func getId() -> Id
-    func setIdValue(val: String)
-}
+struct Saider {
+    public init() {}
 
-class Saider {}
-
-extension Saider {
     /// Saider is Matter subclass for self-addressing identifier prefix using
     /// derivation as determined by code from ked
     ///
     /// - Parameters:
     ///   - sad: self addressed data to serialize and inject said
-    ///   - code: derivation code to indicate cypher suite
-    ///   - kind: serialization algorithm of sad, one of Serials
-    ///           used to override that given by 'v' field if any in sad
-    ///           otherwise default is Serials.json
-    ///   - label: id field label, one of Ids
     /// - Throws:
-    func saidify(sad: Saidable,
-                 code: String = MatterCodex[MatterCodes.Blake3_256]!,
-                 kind: Serial = .json,
-                 label: Id = Id.d) throws
-    {
-        if !Ids.contains(sad.getId()) {
-            throw SaiderErrors.idNotFound
-        }
+    static func saidify(sad: inout Saidable) throws {
+        let size = MatterSizes[MatterCodex[MatterCodes.Blake3_256]!]!
 
-        if code != MatterCodex[MatterCodes.Blake3_256]! {
-            throw SaiderErrors.invalidCode(code)
-        }
+        // pad id to match final size
+        sad.setId(v: String(repeating: "#", count: size.fs!))
 
-        guard let size = MatterSizes[code] else {
-            throw SaiderErrors.invalidCode(code)
-        }
+        // perform any additional calls before hashing, designated by protocol conformance
+        // Example: recalculate the version string before final hashing
+        sad.preHash()
 
-        sad.setIdValue(val: String(repeating: "#", count: size.fs!))
-
-//        var raw: [UInt8]
-//        if sad.keys.contains("v") { // specific to KERI
-//            (raw, _, _) = try sizeify(ked: &sad, kind: kind)
-//        } else {
-//        raw = try dumps(ked: sad, kind: kind)
-        ////        }
-//
-//        let hashed = BLAKE3.hash(contentsOf: raw)
-//        sad[label.rawValue] = Base64.encodeString(bytes: hashed)
+        sad.setId(v: Base64.encodeString(bytes: BLAKE3.hash(contentsOf: try sad.dumps())))
     }
 }
-
-// struct Saider: Saidify {
-//    var sad: OrderedDictionary<String, Any>
-//    var m: Matter?
-//
-//    init() {
-//        self.sad = [:]
-//    }
-// }

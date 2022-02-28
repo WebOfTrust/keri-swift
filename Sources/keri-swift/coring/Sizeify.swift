@@ -22,7 +22,8 @@ class Sizer {
     ///   - version: Versionage
     /// - Throws:
     func sizeify(ked: inout OrderedDictionary<String, Any>, kind: Serial = .json)
-        throws -> (raw: [UInt8], kind: Serial, version: Versionage) {
+        throws -> (raw: [UInt8], kind: Serial, version: Versionage)
+    {
 //        guard let vs = ked["v"] as? String else {
 //            throw SizeifyErrors.missingVersion
 //        }
