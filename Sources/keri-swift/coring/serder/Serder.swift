@@ -9,7 +9,7 @@ import SwiftCBOR
 
 /// Serder is KERI key event serializer-deserializer class
 /// Only supports current version VERSION
-struct Serder: Sizeify {
+struct Serder {
     private var _raw: [UInt8] = []
     /// Bytes of serialized event
     public var raw: [UInt8] {
@@ -92,11 +92,11 @@ struct Serder: Sizeify {
             throw SerderErrors.insufficientBytes
         }
 
-        guard let ked = try loads(raw: self._raw, size: v.size, kind: v.kind) else {
-            throw SerderErrors.failedKedExtraction
-        }
+//        guard let ked = try loads(raw: self._raw, size: v.size, kind: v.kind) else {
+//            throw SerderErrors.failedKedExtraction
+//        }
 
-        return (ked, v.ident, v.kind, v.version, v.size)
+        return (self.ked, v.ident, v.kind, v.version, v.size)
     }
 
     /// exhale - (sizeify)
@@ -109,9 +109,9 @@ struct Serder: Sizeify {
     ///     - kind is serialization kind
     ///     - version is Versionage instance
     /// - Throws:
-    private func exhale(ked: inout OrderedDictionary<String, Any>, kind: Serial = .json)
-        throws -> (raw: [UInt8], kind: Serial, version: Versionage)
-    {
-        try sizeify(ked: &ked, kind: kind)
-    }
+//    private func exhale(ked: inout OrderedDictionary<String, Any>, kind: Serial = .json)
+//        throws -> (raw: [UInt8], kind: Serial, version: Versionage)
+//    {
+    ////        try sizeify(ked: &ked, kind: kind)
+//    }
 }
