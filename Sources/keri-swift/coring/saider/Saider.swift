@@ -11,7 +11,7 @@ protocol Saidable {
     func setIdValue(val: String)
 }
 
-class Saider: Loadage {}
+class Saider {}
 
 extension Saider {
     /// Saider is Matter subclass for self-addressing identifier prefix using
