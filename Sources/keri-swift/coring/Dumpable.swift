@@ -7,7 +7,7 @@ import RNJSON
 
 /// Dumpable
 protocol Dumpable: Encodable {
-    var kind: Serial { get }
+    var kind: Serial { get set }
 }
 
 enum DumpableErrors: Error, Equatable {

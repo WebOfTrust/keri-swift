@@ -12,7 +12,7 @@ final class DumpableTests: XCTestCase {
         let a: String
         let b: Int
         let c: nested
-        let kind: Serial
+        var kind: Serial
 
         enum CodingKeys: String, CodingKey {
             case a, b, c
