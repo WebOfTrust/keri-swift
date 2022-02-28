@@ -42,9 +42,3 @@ extension EventSeal: Codable {
         try container.encode(String(self.s), forKey: .s)
     }
 }
-
-extension EventSeal: Equatable {
-    public static func == (lhs: EventSeal, rhs: EventSeal) -> Bool {
-        lhs.d == rhs.d && lhs.i == rhs.i && lhs.s == rhs.s
-    }
-}
