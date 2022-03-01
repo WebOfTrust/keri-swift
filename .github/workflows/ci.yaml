@@ -44,3 +44,15 @@ jobs:
           xcodebuild -quiet -parallel-testing-enabled YES -scheme keri-swift -destination platform=macOS -enableCodeCoverage YES build test
       - name: Codecov
         run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}} -f *.coverage.txt
+
+  publish:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      – name: Publish Jazzy Docs
+        uses: steven0351/publish-jazzy-docs@v1
+        with:
+          personal_access_token: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          config: .jazzy.yaml
+
