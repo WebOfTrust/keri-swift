@@ -48,11 +48,11 @@
       },
       {
         "package": "RNJSON",
-        "repositoryURL": "https://github.com/m00sey/RNJSON.git",
+        "repositoryURL": "https://github.com/WebOfTrust/RNJSON.git",
         "state": {
-          "branch": "main",
-          "revision": "1c067f17bdfa10a676fa519d039c44ed1773631e",
-          "version": null
+          "branch": null,
+          "revision": "1431923837480fee86e5d970cfa0fe601ff7d38c",
+          "version": "0.0.1"
         }
       },
       {
