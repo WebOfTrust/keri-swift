@@ -1,0 +1,7 @@
+author: Kevin Griffin
+author_url: https://keri.one/
+github_url: https://github.com/WebOfTrust/keri-swift
+root_url: https://keri-swift.github.io
+module: keri_swift
+output: docs
+theme: fullwidth
