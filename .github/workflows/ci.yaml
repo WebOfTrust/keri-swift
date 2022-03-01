@@ -46,12 +46,13 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}} -f *.coverage.txt
 
   publish:
+    needs: test
     runs-on: macos-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      – name: Publish Jazzy Docs
-        uses: steven0351/publish-jazzy-docs@v1
-        with:
-          personal_access_token: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-          config: .jazzy.yaml
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Publish Jazzy Docs
+      uses: actions/publish-jazzy-docs@v1
+      with:
+        personal_access_token: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+        config: .jazzy.yaml
