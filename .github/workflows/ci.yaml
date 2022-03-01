@@ -55,4 +55,3 @@ jobs:
         with:
           personal_access_token: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
           config: .jazzy.yaml
-
