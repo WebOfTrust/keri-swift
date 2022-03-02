@@ -29,8 +29,12 @@ public let Version = Versionage(major: 1, minor: 0)
 /// - Returns: version string
 // swiftlint:disable line_length
 public func versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
-    String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue,
-           String(size, radix: 16).padding(toLength: 6, withPad: "0", startingAt: 0))
+    var vize = String(size, radix: 16)
+    if vize.count < 6 {
+        vize = String(repeatElement("0", count: 6 - vize.count)) + vize
+    }
+
+    return String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue, vize)
 }
 
 public let Verex = #"(?<ident>[A-Z]{4})(?<major>[0-9a-f])(?<minor>[0-9a-f])(?<kind>[A-Z]{4})(?<size>[0-9a-f]{6})_"#
@@ -71,7 +75,7 @@ public func deversify(vs: String) throws -> Deversified {
           let kind = Serial(rawValue: captures["kind"]!),
           let major = Int(captures["major"]!),
           let minor = Int(captures["minor"]!),
-          let size = Int(captures["size"]!)
+          let size = Int(captures["size"]!, radix: 16)
     else {
         throw VersionErrors.invalidVersion
     }
