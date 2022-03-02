@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum SaiderErrors: Error, Comparable {
+enum SaiderErrors: Error {
     case badInitialization
     case labelNotFound
     case invalidCode(String)

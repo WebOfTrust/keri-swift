@@ -241,13 +241,6 @@
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Ilks.swift",
       "line": 32,
-      "symbol": "Ilk",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Ilks.swift",
-      "line": 38,
       "symbol": "Ilks",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
@@ -261,28 +254,28 @@
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Serial.swift",
-      "line": 12,
+      "line": 8,
       "symbol": "Serial.json",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Serial.swift",
-      "line": 13,
+      "line": 9,
       "symbol": "Serial.mgpk",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Serial.swift",
-      "line": 14,
+      "line": 10,
       "symbol": "Serial.cbor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/Serial.swift",
-      "line": 17,
+      "line": 13,
       "symbol": "Serials",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
@@ -890,76 +883,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 8,
-      "symbol": "VerRawSize",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 11,
-      "symbol": "VerFmt",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 14,
-      "symbol": "VerFullSize",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 15,
-      "symbol": "MinSniffSize",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 17,
-      "symbol": "Versionage",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 20,
-      "symbol": "Version",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 31,
-      "symbol": "versify(ident:version:kind:size:)",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 36,
-      "symbol": "Verex",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 38,
-      "symbol": "Rever",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/coring/version/Version.swift",
-      "line": 41,
-      "symbol": "Deversified",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/BackedCredentialIssuance.swift",
       "line": 23,
       "symbol": "BackedCredentialIssuance.v",
@@ -1020,13 +943,6 @@
       "line": 32,
       "symbol": "BackedCredentialIssuance.init(v:t:d:i:s:ri:ra:dt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/BackedCredentialRevocation.swift",
-      "line": 23,
-      "symbol": "BackedCredentialRevocation",
-      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
@@ -1097,13 +1013,6 @@
       "line": 34,
       "symbol": "BackedCredentialRevocation.init(v:t:d:i:s:p:ri:ra:dt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/BackedCredentialRevocation.swift",
-      "line": 51,
-      "symbol": "BackedCredentialRevocation",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -1710,7 +1619,7 @@
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/Interaction.swift",
-      "line": 34,
+      "line": 33,
       "symbol": "IXN.init(v:t:d:i:s:p:a:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1948,13 +1857,6 @@
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/RegistryInception.swift",
-      "line": 19,
-      "symbol": "RegistryInception",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/RegistryInception.swift",
       "line": 20,
       "symbol": "RegistryInception.v",
       "symbol_kind": "source.lang.swift.decl.var.instance",
@@ -2021,13 +1923,6 @@
       "line": 30,
       "symbol": "RegistryInception.init(v:t:d:i:ii:s:bt:b:c:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/RegistryInception.swift",
-      "line": 47,
-      "symbol": "RegistryInception",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -2207,13 +2102,6 @@
     },
     {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/TransactionStateNotice.swift",
-      "line": 30,
-      "symbol": "TransactionStateNotice",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/TransactionStateNotice.swift",
       "line": 31,
       "symbol": "TransactionStateNotice.v",
       "symbol_kind": "source.lang.swift.decl.var.instance",
@@ -2311,13 +2199,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/TransactionStateNotice.swift",
-      "line": 69,
-      "symbol": "TransactionStateNotice",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/eventing/TransferablePrefixSignerReceipt.swift",
       "line": 23,
       "symbol": "VRC.v",
@@ -2364,69 +2245,6 @@
       "line": 30,
       "symbol": "VRC.init(v:t:d:i:s:a:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/Converting.swift",
-      "line": 8,
-      "symbol": "ConversionErrors",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/Converting.swift",
-      "line": 9,
-      "symbol": "ConversionErrors.undefined",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/Converting.swift",
-      "line": 10,
-      "symbol": "ConversionErrors.characterNotFound(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/Converting.swift",
-      "line": 52,
-      "symbol": "B64ChrByIdx",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/Converting.swift",
-      "line": 76,
-      "symbol": "B64IdxByChr",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/JSONCodingKeys.swift",
-      "line": 8,
-      "symbol": "JSONNull",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/JSONCodingKeys.swift",
-      "line": 21,
-      "symbol": "JSONNull.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/JSONCodingKeys.swift",
-      "line": 56,
-      "symbol": "JSONAny",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/kgriffin/dev/WebOfTrust/keri-swift/Sources/keri-swift/helping/JSONCodingKeys.swift",
-      "line": 57,
-      "symbol": "JSONAny.value",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],

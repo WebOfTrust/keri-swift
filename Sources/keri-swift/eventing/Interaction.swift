@@ -30,7 +30,6 @@ public struct IXN {
     public var p: String
     public var a: [EventSeal]
 
-    // swiftlint:disable line_length
     public init(v: String, t: Ilk, d: String, i: String, s: Int, p: String, a: [EventSeal]) {
         self.v = v
         self.t = t
@@ -40,8 +39,6 @@ public struct IXN {
         self.p = p
         self.a = a
     }
-
-    // swiftlint:enable line_length
 
     enum CodingKeys: String, CodingKey {
         case v, t, d, i, s, p, a

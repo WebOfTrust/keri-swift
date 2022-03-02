@@ -5,13 +5,13 @@
 import Collections
 import Foundation
 
-public enum ConversionErrors: Error, Equatable {
+enum ConversionErrors: Error, Equatable {
     case undefined
     case characterNotFound(Character)
 }
 
 /// Returns conversion of Base64 str s or bytes to int
-public func B64ToInt(s: String) throws -> Int {
+func B64ToInt(s: String) throws -> Int {
     if s.isEmpty {
         throw ConversionErrors.undefined
     }
@@ -29,7 +29,7 @@ public func B64ToInt(s: String) throws -> Int {
 
 /// Returns conversion of int i to Base64 str
 /// l is min number of b64 digits left padded with Base64 0 == "A" char
-public func IntToB64(i: Int, l: Int? = 1) -> String {
+func IntToB64(i: Int, l: Int? = 1) -> String {
     var d: Deque<String> = []
     var _i = i, _l = l!
 
@@ -49,7 +49,7 @@ public func IntToB64(i: Int, l: Int? = 1) -> String {
     return d.joined(separator: "")
 }
 
-public let B64ChrByIdx: [Int: String] = {
+let B64ChrByIdx: [Int: String] = {
     var _B64ChrIdx: [Int: String] = [:]
     var x = 0
 
@@ -73,7 +73,7 @@ public let B64ChrByIdx: [Int: String] = {
     return _B64ChrIdx
 }()
 
-public let B64IdxByChr: [String: Int] = {
+let B64IdxByChr: [String: Int] = {
     var _B64IdxByChr: [String: Int] = [:]
 
     for (k, v) in B64ChrByIdx {

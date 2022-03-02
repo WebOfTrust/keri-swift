@@ -19,7 +19,9 @@ extension Dumpable {
     func dumps() throws -> [UInt8] {
         switch kind {
         case .json:
-            return try [UInt8](RNJSONEncoder().encode(self))
+            let data = try RNJSONEncoder().encode(self)
+            print(String(data: data, encoding: .utf8)!)
+            return [UInt8](data)
         case .cbor, .mgpk:
             throw DumpableErrors.notImplemented(kind)
         }

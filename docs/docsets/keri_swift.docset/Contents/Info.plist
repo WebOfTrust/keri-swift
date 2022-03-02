@@ -17,6 +17,6 @@
     <key>DashDocSetFamily</key>
       <string>dashtoc</string>
     <key>DashDocSetFallbackURL</key>
-      <string>https://keri-swift.github.io/</string>
+      <string>https://weboftrust.github.io/keri-swift/</string>
   </dict>
 </plist>

@@ -6,20 +6,20 @@ import Foundation
 
 /// Backed Credential Revocation
 /// {
-//  "v" : "KERI10JSON00011c_",
-//  "t" : "brv",
-//  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-//  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-//  "s" : "1",
-//  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-//  "ri" : "EvxMACzQxU2rDj-X5SPDZYtUn56i4fjjH8yDRFRzaMfI",
-//  "ra" : {
-//      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
-//      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
-//      "s": "0"
-//  },
-//  "dt": "2020-08-01T12:20:05.123456+00:00"
-// }
+///  "v" : "KERI10JSON00011c_",
+///  "t" : "brv",
+///  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+///  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+///  "s" : "1",
+///  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+///  "ri" : "EvxMACzQxU2rDj-X5SPDZYtUn56i4fjjH8yDRFRzaMfI",
+///  "ra" : {
+///      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
+///      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
+///      "s": "0"
+///  },
+///  "dt": "2020-08-01T12:20:05.123456+00:00"
+/// }
 public struct BackedCredentialRevocation {
     public var v: String
     public var t: Ilk

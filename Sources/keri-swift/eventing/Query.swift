@@ -30,7 +30,6 @@ struct QueryMessage {
     public var rr: String
     public var q: Query
 
-    // swiftlint:disable line_length
     public init(v: String, t: Ilk, d: String, dt: Date, r: String, rr: String, q: Query) {
         self.v = v
         self.t = t
@@ -40,8 +39,6 @@ struct QueryMessage {
         self.rr = rr
         self.q = q
     }
-
-    // swiftlint:enable line_length
 
     enum CodingKeys: String, CodingKey {
         case v, t, d, dt, r, rr, q
