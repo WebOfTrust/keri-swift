@@ -20,7 +20,6 @@ extension Dumpable {
         switch kind {
         case .json:
             let data = try RNJSONEncoder().encode(self)
-            print(String(data: data, encoding: .utf8)!)
             return [UInt8](data)
         case .cbor, .mgpk:
             throw DumpableErrors.notImplemented(kind)
