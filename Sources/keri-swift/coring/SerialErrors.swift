@@ -4,6 +4,6 @@
 
 import Foundation
 
-enum SerialErrors: Error, Comparable {
+enum SerialErrors: Error {
     case invalidSerialization(Serial)
 }

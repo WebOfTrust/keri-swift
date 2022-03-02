@@ -6,16 +6,16 @@ import Foundation
 
 /// Registry Inception
 /// {
-//  "v" : "KERI10JSON00011c_",
-//  "t" : "vcp",
-//  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-//  "i" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-//  "ii": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
-//  "s" : "0",
-//  "bt": "1",
-//  "b" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
-//  "c" : ["NB"]
-// }
+///  "v" : "KERI10JSON00011c_",
+///  "t" : "vcp",
+///  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+///  "i" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+///  "ii": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
+///  "s" : "0",
+///  "bt": "1",
+///  "b" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
+///  "c" : ["NB"]
+/// }
 public struct RegistryInception {
     public var v: String
     public var t: Ilk

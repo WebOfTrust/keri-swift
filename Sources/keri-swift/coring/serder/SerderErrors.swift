@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum SerderErrors: Error, Comparable {
+public enum SerderErrors: Error {
     case improperInitialization
     case insufficientBytes
     case invalidDeserializationKind(Serial)

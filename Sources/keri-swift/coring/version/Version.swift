@@ -5,19 +5,20 @@
 import Foundation
 
 // hex characters in raw serialization size in version string
-public let VerRawSize = 6
+let VerRawSize = 6
 
 // Version format
-public let VerFmt = "%@%x%x%@%@_"
+let VerFmt = "%@%x%x%@%@_"
 
 // number of characters in full versions string
-public let VerFullSize = 17
-public let MinSniffSize = VerFullSize + 12
+let VerFullSize = 17
+// {"v":"KERI10JSON00011c_"}
+let MinSniffSize = 25
 
-public typealias Versionage = (major: Int, minor: Int)
+typealias Versionage = (major: Int, minor: Int)
 
 // KERI Protocol Version
-public let Version = Versionage(major: 1, minor: 0)
+let Version = Versionage(major: 1, minor: 0)
 
 /// Versify
 ///
@@ -27,8 +28,7 @@ public let Version = Versionage(major: 1, minor: 0)
 ///   - kind: serialization kind, one of Serials
 ///   - size: int of raw size
 /// - Returns: version string
-// swiftlint:disable line_length
-public func versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
+func versify(ident: Ident = .keri, version: Versionage = Version, kind: Serial = .json, size: Int = 0) -> String {
     var vize = String(size, radix: 16)
     if vize.count < 6 {
         vize = String(repeatElement("0", count: 6 - vize.count)) + vize
@@ -37,12 +37,12 @@ public func versify(ident: Ident = .keri, version: Versionage = Version, kind: S
     return String(format: VerFmt, ident.rawValue, version.major, version.minor, kind.rawValue, vize)
 }
 
-public let Verex = #"(?<ident>[A-Z]{4})(?<major>[0-9a-f])(?<minor>[0-9a-f])(?<kind>[A-Z]{4})(?<size>[0-9a-f]{6})_"#
+let Verex = #"(?<ident>[A-Z]{4})(?<major>[0-9a-f])(?<minor>[0-9a-f])(?<kind>[A-Z]{4})(?<size>[0-9a-f]{6})_"#
 // swiftlint:disable force_try
-public let Rever = try! NSRegularExpression(pattern: Verex, options: [])
+let Rever = try! NSRegularExpression(pattern: Verex, options: [])
 let Groups = ["ident", "major", "minor", "kind", "size"]
 
-public typealias Deversified = (ident: Ident, kind: Serial, version: Versionage, size: Int)
+typealias Deversified = (ident: Ident, kind: Serial, version: Versionage, size: Int)
 /// Deversify
 /// - Parameter vs: version string
 /// - Returns: Deversified(ident, kind, version, size)
@@ -51,7 +51,7 @@ public typealias Deversified = (ident: Ident, kind: Serial, version: Versionage,
 ///     - version is version tuple of type Version
 ///     - size is int of raw size
 /// - Throws: VersionErrors.invalidVersion
-public func deversify(vs: String) throws -> Deversified {
+func deversify(vs: String) throws -> Deversified {
     let rng = NSRange(vs.startIndex ..< vs.endIndex, in: vs)
     var captures: [String: String] = [:]
 

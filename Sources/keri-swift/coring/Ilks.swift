@@ -29,12 +29,6 @@ public enum Ilk: String, Codable {
     case brv // brv = backed vc revoke, registry-backed transaction event log credential revocation
 }
 
-extension Ilk: Comparable {
-    public static func < (lhs: Ilk, rhs: Ilk) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
-}
-
 public let Ilks: Set<Ilk> = [
     .icp,
     .rot,

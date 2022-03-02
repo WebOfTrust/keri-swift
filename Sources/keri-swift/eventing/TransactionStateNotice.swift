@@ -5,28 +5,28 @@
 import Foundation
 
 /// Transaction State Notice
-// {
-//  "v": "KERI10JSON0001b0_",
-//  "d": "EpltHxeKueSR1a7e0_oSAhgO6U7VDnX7x4KqNCwBqbI0",
-//  "i": "EoN_Ln_JpgqsIys-jDOH8oWdxgWqs7hzkDGeLWHb9vSY",
-//  "s": "1",
-//  "ii": "EaKJ0FoLxO1TYmyuprguKO7kJ7Hbn0m0Wuk5aMtSrMtY",
-//  "dt": "2021-01-01T00:00:00.000000+00:00",
-//  "et": "vrt",
-//  "a": {
-//    "s": 2,
-//    "d": "Ef12IRHtb_gVo5ClaHHNV90b43adA0f8vRs3jeU-AstY"
-//  },
-//  "bt": "1",
-//  "br": [],
-//  "ba": [
-//    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
-//  ],
-//  "b": [
-//    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
-//  ],
-//  "c": []
-// }
+/// {
+///  "v": "KERI10JSON0001b0_",
+///  "d": "EpltHxeKueSR1a7e0_oSAhgO6U7VDnX7x4KqNCwBqbI0",
+///  "i": "EoN_Ln_JpgqsIys-jDOH8oWdxgWqs7hzkDGeLWHb9vSY",
+///  "s": "1",
+///  "ii": "EaKJ0FoLxO1TYmyuprguKO7kJ7Hbn0m0Wuk5aMtSrMtY",
+///  "dt": "2021-01-01T00:00:00.000000+00:00",
+///  "et": "vrt",
+///  "a": {
+///    "s": 2,
+///    "d": "Ef12IRHtb_gVo5ClaHHNV90b43adA0f8vRs3jeU-AstY"
+///  },
+///  "bt": "1",
+///  "br": [],
+///  "ba": [
+///    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+///  ],
+///  "b": [
+///    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+///  ],
+///  "c": []
+/// }
 public struct TransactionStateNotice {
     public var v: String
     public var d: String

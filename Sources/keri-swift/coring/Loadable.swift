@@ -21,7 +21,7 @@ extension Loadable {
     ///   - kind: serialization kind (JSON, MGPK, CBOR)
     /// - Returns: deserialized ked
     /// - Throws:
-    static func loads(raw: [UInt8], kind: Serial) throws -> Self {
+    static func loads(raw: [UInt8], kind: Serial = .json) throws -> Self {
         switch kind {
         case .json:
             return try RNJSONDecoder().decode(Self.self, from: Data(raw))
