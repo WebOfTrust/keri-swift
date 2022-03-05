@@ -18,7 +18,7 @@ let minSniffSize = 25
 typealias Versionage = (major: Int, minor: Int)
 
 // KERI Protocol Version
-let version = Versionage(major: 1, minor: 0)
+let verzion = Versionage(major: 1, minor: 0)
 
 /// Versify
 ///
@@ -28,7 +28,7 @@ let version = Versionage(major: 1, minor: 0)
 ///   - kind: serialization kind, one of Serials
 ///   - size: int of raw size
 /// - Returns: version string
-func versify(ident: Ident = .keri, version: Versionage = version, kind: Serial = .json, size: Int = 0) -> String {
+func versify(ident: Ident = .keri, version: Versionage = verzion, kind: Serial = .json, size: Int = 0) -> String {
     var vize = String(size, radix: 16)
     if vize.count < 6 {
         vize = String(repeatElement("0", count: 6 - vize.count)) + vize
