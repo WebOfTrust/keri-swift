@@ -8,11 +8,11 @@ import XCTest
 
 final class IdTests: XCTestCase {
     func testIds() {
-        XCTAssertTrue(Ids.contains(.dollar))
-        XCTAssertTrue(Ids.contains(.at))
-        XCTAssertTrue(Ids.contains(.id))
-        XCTAssertTrue(Ids.contains(.i))
-        XCTAssertTrue(Ids.contains(.d))
+        XCTAssertTrue(ids.contains(.dollar))
+        XCTAssertTrue(ids.contains(.at))
+        XCTAssertTrue(ids.contains(.id))
+        XCTAssertTrue(ids.contains(.i))
+        XCTAssertTrue(ids.contains(.d))
     }
 
     func testBadInit() {

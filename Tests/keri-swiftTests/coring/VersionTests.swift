@@ -10,7 +10,7 @@ final class VersionTests: XCTestCase {
     func testVersify() throws {
         var vsy = ""
 
-        XCTAssertNoThrow(vsy = versify(ident: .keri, version: Version, kind: .json, size: 284))
+        XCTAssertNoThrow(vsy = versify(ident: .keri, version: version, kind: .json, size: 284))
         XCTAssertEqual(vsy, "KERI10JSON00011c_")
     }
 

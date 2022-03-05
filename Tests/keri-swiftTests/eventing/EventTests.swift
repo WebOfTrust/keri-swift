@@ -459,7 +459,7 @@ final class EventTests: XCTestCase {
             t: Ilk.exp,
             d: "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
             r: "sealed/processor",
-            a: A(
+            a: ExposeBody(
                 d: "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
                 i: "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
                 dt: "2022-02-24T16:11:43.903Z".iso8601WithFractionalSeconds!,

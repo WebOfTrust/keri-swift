@@ -24,9 +24,9 @@ public struct ExposeMessage {
     public var t: Ilk
     public var d: String
     public var r: String
-    public var a: A
+    public var a: ExposeBody
 
-    public init(v: String, t: Ilk, d: String, r: String, a: A) {
+    public init(v: String, t: Ilk, d: String, r: String, a: ExposeBody) {
         self.v = v
         self.t = t
         self.d = d
@@ -46,7 +46,7 @@ extension ExposeMessage: Codable {
         self.t = try values.decode(Ilk.self, forKey: .t)
         self.d = try values.decode(String.self, forKey: .d)
         self.r = try values.decode(String.self, forKey: .r)
-        self.a = try values.decode(A.self, forKey: .a)
+        self.a = try values.decode(ExposeBody.self, forKey: .a)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -60,7 +60,7 @@ extension ExposeMessage: Codable {
 }
 
 /// A
-public struct A {
+public struct ExposeBody {
     public var d: String
     public var i: String
     public var dt: Date
@@ -80,7 +80,8 @@ public struct A {
     }
 }
 
-extension A: Codable {
+/// - Todo: Expose will need a protocol so we can have a generic body that is serializable
+extension ExposeBody: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.d = try values.decode(String.self, forKey: .d)

@@ -9,31 +9,31 @@ import XCTest
 
 final class ConvertingTests: XCTestCase {
     func testB64ToInt() throws {
-        XCTAssertThrowsError(try B64ToInt(s: "")) { error in
+        XCTAssertThrowsError(try b64ToInt(s: "")) { error in
             XCTAssertEqual(error as! ConversionErrors, ConversionErrors.undefined)
         }
 
-        XCTAssertThrowsError(try B64ToInt(s: "@")) { error in
+        XCTAssertThrowsError(try b64ToInt(s: "@")) { error in
             XCTAssertEqual(error as! ConversionErrors, ConversionErrors.characterNotFound("@"))
         }
 
-        XCTAssertEqual(try B64ToInt(s: "A"), 0)
-        XCTAssertEqual(try B64ToInt(s: "b"), 27)
-        XCTAssertEqual(try B64ToInt(s: "Ab"), 27)
-        XCTAssertEqual(try B64ToInt(s: "BQ"), 80)
-        XCTAssertEqual(try B64ToInt(s: "__"), 4095)
-        XCTAssertEqual(try B64ToInt(s: "BAA"), 4096)
-        XCTAssertEqual(try B64ToInt(s: "Bd7"), 6011)
+        XCTAssertEqual(try b64ToInt(s: "A"), 0)
+        XCTAssertEqual(try b64ToInt(s: "b"), 27)
+        XCTAssertEqual(try b64ToInt(s: "Ab"), 27)
+        XCTAssertEqual(try b64ToInt(s: "BQ"), 80)
+        XCTAssertEqual(try b64ToInt(s: "__"), 4095)
+        XCTAssertEqual(try b64ToInt(s: "BAA"), 4096)
+        XCTAssertEqual(try b64ToInt(s: "Bd7"), 6011)
     }
 
     func testIntToB64() {
-        XCTAssertEqual(IntToB64(i: 0), "A")
-        XCTAssertEqual(IntToB64(i: 0, l: 0), "")
-        XCTAssertEqual(IntToB64(i: 27), "b")
-        XCTAssertEqual(IntToB64(i: 27, l: 2), "Ab")
-        XCTAssertEqual(IntToB64(i: 80), "BQ")
-        XCTAssertEqual(IntToB64(i: 4095), "__")
-        XCTAssertEqual(IntToB64(i: 4096), "BAA")
-        XCTAssertEqual(IntToB64(i: 6011), "Bd7")
+        XCTAssertEqual(intToB64(i: 0), "A")
+        XCTAssertEqual(intToB64(i: 0, l: 0), "")
+        XCTAssertEqual(intToB64(i: 27), "b")
+        XCTAssertEqual(intToB64(i: 27, l: 2), "Ab")
+        XCTAssertEqual(intToB64(i: 80), "BQ")
+        XCTAssertEqual(intToB64(i: 4095), "__")
+        XCTAssertEqual(intToB64(i: 4096), "BAA")
+        XCTAssertEqual(intToB64(i: 6011), "Bd7")
     }
 }
