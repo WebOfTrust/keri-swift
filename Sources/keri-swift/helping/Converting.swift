@@ -11,14 +11,14 @@ enum ConversionErrors: Error, Equatable {
 }
 
 /// Returns conversion of Base64 str s or bytes to int
-func B64ToInt(s: String) throws -> Int {
+func b64ToInt(s: String) throws -> Int {
     if s.isEmpty {
         throw ConversionErrors.undefined
     }
 
     var i = 0
     for (e, c) in s.reversed().enumerated() {
-        guard let ch = B64IdxByChr[String(c)] else {
+        guard let ch = b64IdxByChr[String(c)] else {
             throw ConversionErrors.characterNotFound(c)
         }
         i |= ch << (e * 6)
@@ -29,7 +29,7 @@ func B64ToInt(s: String) throws -> Int {
 
 /// Returns conversion of int i to Base64 str
 /// l is min number of b64 digits left padded with Base64 0 == "A" char
-func IntToB64(i: Int, l: Int? = 1) -> String {
+func intToB64(i: Int, l: Int? = 1) -> String {
     var d: Deque<String> = []
     var _i = i, _l = l!
 
@@ -38,7 +38,7 @@ func IntToB64(i: Int, l: Int? = 1) -> String {
     }
 
     repeat {
-        d.prepend(B64ChrByIdx[_i % 64]!)
+        d.prepend(b64ChrByIdx[_i % 64]!)
         _i = Int(floor(Double(_i / 64)))
     } while _i != 0
 
@@ -49,7 +49,7 @@ func IntToB64(i: Int, l: Int? = 1) -> String {
     return d.joined(separator: "")
 }
 
-let B64ChrByIdx: [Int: String] = {
+let b64ChrByIdx: [Int: String] = {
     var _B64ChrIdx: [Int: String] = [:]
     var x = 0
 
@@ -73,10 +73,10 @@ let B64ChrByIdx: [Int: String] = {
     return _B64ChrIdx
 }()
 
-let B64IdxByChr: [String: Int] = {
+let b64IdxByChr: [String: Int] = {
     var _B64IdxByChr: [String: Int] = [:]
 
-    for (k, v) in B64ChrByIdx {
+    for (k, v) in b64ChrByIdx {
         _B64IdxByChr[v] = k
     }
 

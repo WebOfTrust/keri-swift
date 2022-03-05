@@ -58,10 +58,11 @@ public struct Matter {
 
      - Returns: Matter
      */
+    // swiftlint:disable cyclomatic_complexity
     public init(raw: [UInt8]? = [UInt8](),
                 qb2: [UInt8]? = [UInt8](),
                 qb64: String? = "",
-                code: String = MatterCodex[MatterCodes.Ed25519N]!) throws
+                code: String = matterCodex[MatterCodes.Ed25519N]!) throws
     {
         self._raw = raw!
         self._code = code
@@ -70,24 +71,24 @@ public struct Matter {
 
         if !self._raw.isEmpty {
             if self.pad == 1 {
-                if !self.OneCharacterCodes.contains(self._code) {
+                if !self.oneCharacterCodes.contains(self._code) {
                     throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
             if self.pad == 2 {
-                if !self.TwoCharacterCodes.contains(self._code) {
+                if !self.twoCharacterCodes.contains(self._code) {
                     throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
             if self.pad == 0 {
-                if !self.FourCharacterCodes.contains(self._code) {
+                if !self.fourCharacterCodes.contains(self._code) {
                     throw MatterErrors.invalidCode(code: self._code, pad: self.pad)
                 }
             }
 
-            guard let sizage = MatterSizes[code] else {
+            guard let sizage = matterSizes[code] else {
                 throw MatterErrors.missingSizageForCode(code: self._code)
             }
 
@@ -104,6 +105,8 @@ public struct Matter {
             throw MatterErrors.improperInitialization
         }
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     /// returns string of fully qualified Base64 characters
     // _code + converted _raw to Base64 with pad chars stripped
@@ -138,13 +141,14 @@ public struct Matter {
     }
 
     // Extracts _code and _raw from qualified Base64
+    // swiftlint:disable cyclomatic_complexity function_body_length
     private mutating func exfil(_qb64: String) throws {
         var codeSize = 1
         var code = String(_qb64.prefix(codeSize))
         let qb64: String
         let fullSize: Int
 
-        if let size = MatterSizes[code] {
+        if let size = matterSizes[code] {
             // strip derivation code
             qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize) ..< _qb64.endIndex])
 
@@ -153,11 +157,11 @@ public struct Matter {
                 throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
-        } else if code == MatterSelectCodex[MatterSelectCodes.Two] {
+        } else if code == matterSelectCodex[MatterSelectCodes.two] {
             codeSize += 1
             code = String(_qb64.prefix(codeSize))
 
-            guard let size = MatterSizes[code] else {
+            guard let size = matterSizes[code] else {
                 throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
@@ -166,11 +170,11 @@ public struct Matter {
                 throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
-        } else if code == MatterSelectCodex[MatterSelectCodes.Four] {
+        } else if code == matterSelectCodex[MatterSelectCodes.four] {
             codeSize += 3
             code = String(_qb64.prefix(codeSize))
 
-            guard let size = MatterSizes[code] else {
+            guard let size = matterSizes[code] else {
                 throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
@@ -179,17 +183,17 @@ public struct Matter {
                 throw MatterErrors.invalidSizeForCode(code: code, got: qb64.count, expected: size.fs!)
             }
             fullSize = size.fs!
-        } else if code == MatterSelectCodex[MatterSelectCodes.Dash] {
+        } else if code == matterSelectCodex[MatterSelectCodes.dash] {
             codeSize += 1
             code = String(_qb64.prefix(codeSize))
 
-            guard let size = MatterCountSizes[code] else {
+            guard let size = matterCountSizes[code] else {
                 throw MatterErrors.invalidDerivationCode(code: code, in: _qb64)
             }
 
             qb64 = String(_qb64[_qb64.index(_qb64.startIndex, offsetBy: codeSize)
                     ..< _qb64.index(_qb64.startIndex, offsetBy: size.fs!)])
-            try self._size = B64ToInt(s: qb64)
+            try self._size = b64ToInt(s: qb64)
             fullSize = size.fs!
         } else {
             throw MatterErrors.improperlyCodedMaterial(_: _qb64)
@@ -210,6 +214,8 @@ public struct Matter {
         self._code = code
     }
 
+    // swiftlint:enable cyclomatic_complexity function_body_length
+
     private func _pad() -> Int {
         let remainder = self._raw.count % 3
         if remainder == 0 {
@@ -219,17 +225,17 @@ public struct Matter {
         return 3 - remainder
     }
 
-    public let OneCharacterCodes: [String] = MatterSizes.filter {
+    public let oneCharacterCodes: [String] = matterSizes.filter {
         $0.key.count == 1
     }
     .map(\.key)
 
-    public let TwoCharacterCodes: [String] = MatterSizes.filter {
+    public let twoCharacterCodes: [String] = matterSizes.filter {
         $0.key.count == 2
     }
     .map(\.key)
 
-    public let FourCharacterCodes: [String] = MatterSizes.filter {
+    public let fourCharacterCodes: [String] = matterSizes.filter {
         $0.key.count == 4
     }
     .map(\.key)

@@ -8,7 +8,7 @@ import Foundation
 struct Diger {
     let matter: Matter
 
-    init(raw: [UInt8], qb64: String? = "", code: String = MatterCodex[MatterCodes.Blake3_256]!) throws {
+    init(raw: [UInt8], qb64: String? = "", code: String = matterCodex[MatterCodes.Blake3_256]!) throws {
         if !raw.isEmpty {
             self.matter = try Matter(raw: raw, code: code)
         } else {

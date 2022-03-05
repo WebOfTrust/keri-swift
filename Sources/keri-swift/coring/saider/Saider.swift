@@ -18,7 +18,7 @@ struct Saider {
     ///   - sad: self addressed data to serialize and inject said
     /// - Throws:
     static func saidify(sad: inout Saidable) throws {
-        let size = MatterSizes[MatterCodex[MatterCodes.Blake3_256]!]!
+        let size = matterSizes[matterCodex[MatterCodes.Blake3_256]!]!
 
         // pad id to match final size
         sad.setId(v: String(repeating: "#", count: size.fs!))

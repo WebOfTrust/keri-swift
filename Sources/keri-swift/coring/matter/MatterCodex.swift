@@ -4,7 +4,7 @@
 
 import Foundation
 
-public let MatterCodex = [
+public let matterCodex = [
     MatterCodes.Ed25519_Seed: "A", //  Ed25519 256 bit random seed for private key
     MatterCodes.Ed25519N: "B", //  Ed25519 verification key non-transferable, basic derivation.
     MatterCodes.X25519: "C", //  X25519 public encryption key, converted from Ed25519.

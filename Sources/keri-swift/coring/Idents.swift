@@ -9,4 +9,4 @@ public enum Ident: String {
     case acdc = "ACDC"
 }
 
-public let Idents: Set<Ident> = [.keri, .acdc]
+public let idents: Set<Ident> = [.keri, .acdc]

@@ -8,9 +8,9 @@ import XCTest
 
 final class SerialsTests: XCTestCase {
     func testSerials() {
-        XCTAssertTrue(Serials.contains(.json))
-        XCTAssertTrue(Serials.contains(.mgpk))
-        XCTAssertTrue(Serials.contains(.cbor))
+        XCTAssertTrue(serials.contains(.json))
+        XCTAssertTrue(serials.contains(.mgpk))
+        XCTAssertTrue(serials.contains(.cbor))
     }
 
     func testBadInit() {

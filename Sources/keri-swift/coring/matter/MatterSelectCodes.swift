@@ -5,7 +5,7 @@
 import Foundation
 
 public enum MatterSelectCodes: String, CaseIterable {
-    case Two
-    case Four
-    case Dash
+    case two
+    case four
+    case dash
 }

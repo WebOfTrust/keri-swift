@@ -10,4 +10,4 @@ public enum Serial: String {
     case cbor = "CBOR"
 }
 
-public let Serials: Set<Serial> = [Serial.json, Serial.mgpk, Serial.cbor]
+public let serials: Set<Serial> = [Serial.json, Serial.mgpk, Serial.cbor]

@@ -4,8 +4,8 @@
 
 import Foundation
 
-public let MatterSelectCodex = [
-    MatterSelectCodes.Two: "0",
-    MatterSelectCodes.Four: "1",
-    MatterSelectCodes.Dash: "-",
+public let matterSelectCodex = [
+    MatterSelectCodes.two: "0",
+    MatterSelectCodes.four: "1",
+    MatterSelectCodes.dash: "-",
 ]

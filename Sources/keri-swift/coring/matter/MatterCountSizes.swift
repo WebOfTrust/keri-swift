@@ -4,7 +4,7 @@
 
 import Foundation
 
-public let MatterCountSizes: [String: Sizage] = [
-    MatterCountCodex[MatterCountCodes.Base64]!: Sizage(hs: 2, ss: 2, fs: 4, ls: 0),
-    MatterCountCodex[MatterCountCodes.Base2]!: Sizage(hs: 2, ss: 2, fs: 4, ls: 0),
+public let matterCountSizes: [String: Sizage] = [
+    matterCountCodex[MatterCountCodes.base64]!: Sizage(hs: 2, ss: 2, fs: 4, ls: 0),
+    matterCountCodex[MatterCountCodes.base2]!: Sizage(hs: 2, ss: 2, fs: 4, ls: 0),
 ]

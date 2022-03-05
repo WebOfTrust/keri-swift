@@ -9,9 +9,9 @@ import XCTest
 final class MatterCodesTests: XCTestCase {
     func testCodexContainsAllCodes() {
         MatterCodes.allCases.forEach {
-            XCTAssertTrue(MatterCodex.keys.contains($0))
+            XCTAssertTrue(matterCodex.keys.contains($0))
         }
 
-        XCTAssertEqual(MatterCodes.allCases.count, MatterSizes.count)
+        XCTAssertEqual(MatterCodes.allCases.count, matterSizes.count)
     }
 }

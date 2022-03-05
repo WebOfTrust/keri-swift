@@ -4,7 +4,7 @@
 
 import Foundation
 
-public let MatterCountCodex = [
-    MatterCountCodes.Base64: "-A",
-    MatterCountCodes.Base2: "-B",
+public let matterCountCodex = [
+    MatterCountCodes.base64: "-A",
+    MatterCountCodes.base2: "-B",
 ]

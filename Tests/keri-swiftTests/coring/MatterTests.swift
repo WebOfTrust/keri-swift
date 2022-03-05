@@ -73,9 +73,9 @@ final class MatterTests: XCTestCase {
         let m = try Matter(raw: bin)
 
         ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"].forEach {
-            XCTAssertTrue(m.OneCharacterCodes.contains($0))
+            XCTAssertTrue(m.oneCharacterCodes.contains($0))
         }
-        XCTAssertEqual(16, m.OneCharacterCodes.count)
+        XCTAssertEqual(16, m.oneCharacterCodes.count)
     }
 
     func testTwoCharacterCountCodeSize() throws {
@@ -83,9 +83,9 @@ final class MatterTests: XCTestCase {
         let m = try Matter(raw: bin)
 
         ["0A", "0B", "0C", "0D", "0E", "0F", "0G", "0H", "4A", "4B", "5A", "5B", "6A", "6B"].forEach {
-            XCTAssertTrue(m.TwoCharacterCodes.contains($0))
+            XCTAssertTrue(m.twoCharacterCodes.contains($0))
         }
-        XCTAssertEqual(14, m.TwoCharacterCodes.count)
+        XCTAssertEqual(14, m.twoCharacterCodes.count)
     }
 
     func testFourCharacterCountCodeSize() throws {
@@ -94,8 +94,8 @@ final class MatterTests: XCTestCase {
 
         ["1AAA", "1AAB", "1AAC", "1AAD", "1AAE", "1AAF", "1AAG", "1AAH", "2AAA", "3AAA", "7AAA",
          "7AAB", "8AAA", "8AAB", "9AAA", "9AAB"].forEach {
-            XCTAssertTrue(m.FourCharacterCodes.contains($0))
+            XCTAssertTrue(m.fourCharacterCodes.contains($0))
         }
-        XCTAssertEqual(16, m.FourCharacterCodes.count)
+        XCTAssertEqual(16, m.fourCharacterCodes.count)
     }
 }

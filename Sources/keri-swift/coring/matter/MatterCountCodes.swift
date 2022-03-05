@@ -5,6 +5,6 @@
 import Foundation
 
 public enum MatterCountCodes: String, CaseIterable {
-    case Base64
-    case Base2
+    case base64
+    case base2
 }

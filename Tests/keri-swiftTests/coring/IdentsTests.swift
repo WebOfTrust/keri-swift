@@ -8,8 +8,8 @@ import XCTest
 
 final class IdentsTest: XCTestCase {
     func testIdents() {
-        XCTAssertTrue(Idents.contains(.keri))
-        XCTAssertTrue(Idents.contains(.acdc))
+        XCTAssertTrue(idents.contains(.keri))
+        XCTAssertTrue(idents.contains(.acdc))
     }
 
     func testBadInit() {

@@ -12,4 +12,4 @@ public enum Id: String {
     case d
 }
 
-public let Ids: Set<Id> = [.dollar, .at, .id, .i, .d]
+public let ids: Set<Id> = [.dollar, .at, .id, .i, .d]
