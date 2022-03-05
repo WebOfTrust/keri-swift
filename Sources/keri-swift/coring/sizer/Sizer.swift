@@ -21,7 +21,7 @@ struct Sizer {
         }
 
         // only support current version
-        if version != version {
+        if version != verzion {
             throw SizeifyErrors.invalidVersion
         }
 
