@@ -67,6 +67,10 @@ public struct ICP {
     enum CodingKeys: String, CodingKey {
         case v, t, d, i, s, kt, k, n, bt, b, c
     }
+
+    // protocols
+    let _kind: Serial = .json
+    let _code: String = ""
 }
 
 extension ICP: Codable {

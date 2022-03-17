@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum SizeifyErrors: Error, Equatable {
+enum SizerErrors: Error, Equatable {
     case missingVersion
     case invalidVersion
     case mismatchedSerialization

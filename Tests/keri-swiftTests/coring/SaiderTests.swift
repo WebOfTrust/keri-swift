@@ -9,6 +9,10 @@ import XCTest
 final class SaidifyTests: XCTestCase {
     func testSaider() throws {
         struct TestSaidable: Saidable {
+            func kind() -> Serial {
+                .json
+            }
+
             var v: String
             var d: String
 
@@ -21,8 +25,6 @@ final class SaidifyTests: XCTestCase {
                 try container.encode(self.v, forKey: .v)
                 try container.encode(self.d, forKey: .d)
             }
-
-            var kind: Serial = .json
 
             mutating func setId(v: String) {
                 self.d = v
@@ -38,6 +40,10 @@ final class SaidifyTests: XCTestCase {
 
     func testSaiderWithDefaultPreHash() throws {
         struct TestSaidable: Saidable {
+            func kind() -> Serial {
+                .json
+            }
+
             var v: String
             var d: String
 
@@ -50,8 +56,6 @@ final class SaidifyTests: XCTestCase {
                 try container.encode(self.v, forKey: .v)
                 try container.encode(self.d, forKey: .d)
             }
-
-            var kind: Serial = .json
 
             func getLabel() -> Id {
                 Id.d

@@ -7,7 +7,7 @@ import RNJSON
 
 /// Dumpable
 protocol Dumpable: Encodable {
-    var kind: Serial { get set }
+    func kind() -> Serial
 }
 
 enum DumpableErrors: Error, Equatable {
@@ -17,12 +17,12 @@ enum DumpableErrors: Error, Equatable {
 
 extension Dumpable {
     func dumps() throws -> [UInt8] {
-        switch kind {
+        switch kind() {
         case .json:
             let data = try RNJSONEncoder().encode(self)
             return [UInt8](data)
         case .cbor, .mgpk:
-            throw DumpableErrors.notImplemented(kind)
+            throw DumpableErrors.notImplemented(kind())
         }
     }
 }

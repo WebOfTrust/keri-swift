@@ -12,7 +12,7 @@ final class DumpableTests: XCTestCase {
         let a: String
         let b: Int
         let c: nested
-        var kind: Serial
+        var _kind: Serial
 
         enum CodingKeys: String, CodingKey {
             case a, b, c
@@ -22,7 +22,7 @@ final class DumpableTests: XCTestCase {
             self.a = a
             self.b = b
             self.c = c
-            self.kind = kind!
+            self._kind = kind!
         }
 
         init(from decoder: Decoder) throws {
@@ -31,7 +31,7 @@ final class DumpableTests: XCTestCase {
             let _b = try values.decode(String.self, forKey: .b)
             self.b = Int(_b)!
             self.c = try values.decode(nested.self, forKey: .c)
-            self.kind = .json
+            self._kind = .json
         }
 
         func encode(to encoder: Encoder) throws {
@@ -39,6 +39,10 @@ final class DumpableTests: XCTestCase {
             try container.encode(self.a, forKey: .a)
             try container.encode(String(self.b), forKey: .b)
             try container.encode(self.c, forKey: .c)
+        }
+
+        func kind() -> Serial {
+            self._kind
         }
     }
 

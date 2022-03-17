@@ -6,17 +6,16 @@ import XCTest
 
 @testable import keri_swift
 
-final class SizeifyTests: XCTestCase {
+final class SizerTests: XCTestCase {
     struct TestSizeable: Sizeable, Loadable {
         var v: String
         var a: String?
-
-        var kind: Serial
+        var _kind: Serial = .json
 
         init(v: String, a: String? = "", kind: Serial? = .json) {
             self.v = v
             self.a = a
-            self.kind = kind!
+            self._kind = kind!
         }
 
         func encode(to encoder: Encoder) throws {
@@ -33,7 +32,11 @@ final class SizeifyTests: XCTestCase {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             self.v = try values.decode(String.self, forKey: .v)
             self.a = try values.decode(String.self, forKey: .a)
-            self.kind = .json
+            self._kind = .json
+        }
+
+        func kind() -> Serial {
+            self._kind
         }
     }
 
@@ -62,7 +65,7 @@ final class SizeifyTests: XCTestCase {
         var ab: [UInt8] = try actual.dumps()
 
         XCTAssertThrowsError(try Sizer().sizeify(sizable: actual as Sizeable, raw: &ab)) { error in
-            XCTAssertEqual(error as! SizeifyErrors, SizeifyErrors.mismatchedSerialization)
+            XCTAssertEqual(error as! SizerErrors, SizerErrors.mismatchedSerialization)
         }
     }
 
@@ -71,7 +74,7 @@ final class SizeifyTests: XCTestCase {
         var ab: [UInt8] = try actual.dumps()
 
         XCTAssertThrowsError(try Sizer().sizeify(sizable: actual as Sizeable, raw: &ab)) { error in
-            XCTAssertEqual(error as! SizeifyErrors, SizeifyErrors.invalidVersion)
+            XCTAssertEqual(error as! SizerErrors, SizerErrors.invalidVersion)
         }
     }
 }

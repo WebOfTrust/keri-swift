@@ -7,6 +7,7 @@ let package = Package(
     name: "keri-swift",
     platforms: [
         .macOS(.v10_13),
+        .iOS(.v12),
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -27,6 +28,7 @@ let package = Package(
         .package(url: "https://github.com/a2/MessagePack.swift.git", .upToNextMajor(from: "4.0.0")),
         .package(url: "https://github.com/unrelentingtech/SwiftCBOR", .upToNextMajor(from: "0.4.4")),
         .package(url: "https://github.com/WebOfTrust/RNJSON.git", .upToNextMajor(from: "0.0.1")),
+        .package(url: "https://github.com/objecthub/swift-numberkit", .upToNextMajor(from: "2.4.1")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -43,11 +45,13 @@ let package = Package(
                 .product(name: "ExtrasBase64", package: "swift-extras-base64"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Collections", package: "swift-collections"),
+                .product(name: "NumberKit", package: "swift-numberkit"),
             ]
         ),
         .testTarget(
             name: "keri-swiftTests",
             dependencies: ["keri-swift"]
         ),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

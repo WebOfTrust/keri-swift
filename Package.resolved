@@ -92,6 +92,15 @@
         }
       },
       {
+        "package": "NumberKit",
+        "repositoryURL": "https://github.com/objecthub/swift-numberkit",
+        "state": {
+          "branch": null,
+          "revision": "e8c1cb9e8220001a7efa857fea88c0bd762c56ea",
+          "version": "2.4.1"
+        }
+      },
+      {
         "package": "swift-numerics",
         "repositoryURL": "https://github.com/apple/swift-numerics",
         "state": {

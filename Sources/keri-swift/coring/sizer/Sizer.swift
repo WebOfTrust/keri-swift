@@ -17,12 +17,12 @@ struct Sizer {
         // purposefully ignoring returned size as that's what we're calculating
         let (ident, knd, version, _) = try deversify(vs: sizable.v)
         if kind != knd {
-            throw SizeifyErrors.mismatchedSerialization
+            throw SizerErrors.mismatchedSerialization
         }
 
         // only support current version
         if version != verzion {
-            throw SizeifyErrors.invalidVersion
+            throw SizerErrors.invalidVersion
         }
 
         // convert given version string to bytes
