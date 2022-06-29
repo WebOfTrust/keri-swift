@@ -43,8 +43,7 @@ func incept(keys: [String],
 
     print(code)
     if code == "", keys.count == 1 {
-        // not self addressing
-        print("I'll implement this")
+        Prefixer.prefix(qb64: keys[0])
     } else {
         try Prefixer.prefix(a: icp, t: ICP.self, code: code)
     }

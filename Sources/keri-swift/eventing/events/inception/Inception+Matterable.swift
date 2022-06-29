@@ -17,20 +17,24 @@ extension ICP: Matterable {
         }
     }
 
-    func qb64() -> String {
-        ""
+    func qb64() throws -> String {
+        try infil(self.code(), self.raw())
     }
 
-    func qb64b() -> [UInt8] {
-        []
+    func qb64b() throws -> [UInt8] {
+        guard let b64 = try qb64() else {
+            return nil
+        }
+
+        return try Base64.decode(string: b64, options: .base64UrlAlphabet)
     }
 
-    func qb2() -> [UInt8] {
-        []
+    func qb2() throws -> [UInt8] {
+        try Base64.decode(string: self.qb64(), options: .base64UrlAlphabet)
     }
 
     func size() -> Int {
-        0
+        self._size
     }
 
     func transferable() -> Bool {
@@ -38,6 +42,6 @@ extension ICP: Matterable {
     }
 
     func digestive() -> Bool {
-        true
+        digCodex.contains(self._code)
     }
 }

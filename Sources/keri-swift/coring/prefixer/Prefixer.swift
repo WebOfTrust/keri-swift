@@ -6,7 +6,9 @@ import Foundation
 import Sodium
 
 struct Prefixer {
-    static func prefix<T>(a: Any, t: T.Type, code: String) throws {
+    static func prefix(qb64: String) {}
+
+        static func prefix<T>(a: Any, t: T.Type, code: String) throws {
         guard let p = a as? Prefixbale else {
             throw PrefixerErrors.invalidEvent
         }
@@ -24,7 +26,7 @@ struct Prefixer {
 
         switch code {
         case matterCodex[MatterCodes.Ed25519N]!, matterCodex[MatterCodes.Ed25519]!:
-            let sodium = Sodium()
+            _ = Sodium()
 //            print(sodium.sign.verify(message: p.raw(), publicKey: p.keys()[0].bytes, signature: "".bytes))
             guard let a = a as? ICP else {
                 throw PrefixerErrors.invalidEvent
